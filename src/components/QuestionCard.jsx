@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import axios from "axios";
 
 const QuestionCard = () =>{
 
@@ -19,3 +20,5 @@ const QuestionCard = () =>{
     </div>)
 
 }
+
+export default QuestionCard

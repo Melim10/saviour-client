@@ -17,10 +17,10 @@ const SignUpPage = () => {
 
     return(<div>
         <form onSubmit={handleSubmit}>
-            <input type="userName" name="userName" value={userName} placeholder="User Name" onChange={(e)=> serUserName(e.target.value)}></input>
+            <input type="userName" name="userName" value={userName} placeholder="User Name" onChange={(e)=> setUserName(e.target.value)}></input>
             <input type="email" name="email" value={email} placeholder="Your Email" onChange={(e)=> setEmail(e.target.value)}></input>
             <input type="password" name="password" value={password} placeholder="Your Password" onChange={(e)=> setPassword(e.target.value)} ></input>
-            <button>Go</button>
+            <button type="submit">Go</button>
         </form>
     </div>)
 }
