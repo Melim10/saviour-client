@@ -34,11 +34,11 @@ function HomePage() {
 
 
   return (
-    <div>
+    <div className="margin-div">
       {isLoggedIn ? (
         <div>
-          <NavBar/>
           <h1>Recent Questions</h1>
+          <button onClick={makeNewQuestion}>Make your question!</button>
           {questions.map((question, id)=>{
             return(
               <div key={id}>
@@ -46,7 +46,6 @@ function HomePage() {
               </div>
           )
           })}
-    <button onClick={makeNewQuestion}>Make your question!</button>
     
 
 

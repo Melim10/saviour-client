@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../Context/auth.context";
+import { useNavigate } from "react-router-dom";
 
 /* const questionSchema = new Schema({
     postedBy: { type: String, required: true },
@@ -14,27 +15,25 @@ import { AuthContext } from "../Context/auth.context";
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const {user} = useContext(AuthContext);
-    console.log(user.name)
+    const {user, isLoggedIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const postedBy=user.name;
 
     const API_URL = "http://localhost:5005/api/questions"
 
 
     const handleSubmit=(e)=>{
-        e.prevent.default();
-        const requestBody = {title, description}
-        console.log =(requestBody)
+        const requestBody = {postedBy, title, description}
+        e.preventDefault();
 
+        console.log("clicked")
         axios.post(API_URL, requestBody)
         .then(()=>{
-            alert("Thank You!")
-            navigate('/homepage')
+            navigate('/')
         })
         .catch((error) => {
             console.log(error)
         })
-
-        
     }
 
     return(
@@ -53,8 +52,8 @@ import { AuthContext } from "../Context/auth.context";
                     <label>
                         <input type="radio" name="options" value="option3" /> Option 3
                     </label>
+                    <button type="submit">Go!</button>
                 </form>
-                <button type="submit">Go!</button>
         </div>
     )
   }

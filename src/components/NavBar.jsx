@@ -9,11 +9,11 @@ return(
     {isLoggedIn && (
         <nav>
             <h1>
-                {user.name}
+                Saviour!
             </h1>
             <div className="nav-buttons">
                 <ul>
-                    <li><a>Profile</a></li>
+                    <li><a>{user.name}</a></li>
                     <li><a>Questions</a></li>
                 </ul>
                 <button onClick={logOut}>Logout</button>

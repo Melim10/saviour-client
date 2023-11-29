@@ -1,6 +1,7 @@
 *{margin: 0;
 padding: 0;
-box-sizing: border-box;}
+box-sizing: border-box;
+z-index: 0;}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
