@@ -6,8 +6,8 @@ import SignUpPage from './pages/SignUpPage'
 import HomePage from './pages/HomePage'
 import ErrorPage from './pages/ErrorPage'
 import NavBar from './components/NavBar'
-import QuestionCardDetails from './components/QuestionCardDetails'
-import NewQuestion from './pages/NewQuestion'
+import NewQuestion from './pages/NewQuestionPage'
+import QuestionDetailsPage from './pages/QuestionDetailsPage'
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<HomePage />}/>
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/login" element={<LoginPage/>} />
-        <Route path="/questions/:questionId" element={<QuestionCardDetails />}/>
+        <Route path="/questions/:questionId" element={<QuestionDetailsPage />}/>
         <Route path="/new-question" element ={<NewQuestion/>} />
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>

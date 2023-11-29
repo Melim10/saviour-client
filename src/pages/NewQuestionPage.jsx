@@ -37,7 +37,7 @@ import { useNavigate } from "react-router-dom";
     }
 
     return(
-        <div>
+        <div className="margin-div">
             <form onSubmit={handleSubmit}>
                 <input type="text" name="title" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={30}/>
                 <input type="text" name="description" value={description} onChange={(e)=> setDescription(e.target.value)}/>

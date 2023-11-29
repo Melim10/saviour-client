@@ -19,7 +19,7 @@ const QuestionCardSmall = (props) =>{
                 )
             })}
             </div>
-            <p>{question.details}</p>
+            <p >{question.description}</p>
         </div>)
 
 }

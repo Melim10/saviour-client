@@ -9,7 +9,6 @@ nav{
   background-color: #242424;
   width:100%;
   height: 8vh;
-  z-index: 2;
 }
 
 nav > * {
@@ -55,4 +54,8 @@ transition: box-shadow 0.25s ease-out;
 
 .margin-div{
   margin-top: 10vh;
+}
+
+.question-details-div{
+  width:100%;
 }

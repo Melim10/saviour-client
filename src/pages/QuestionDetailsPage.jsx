@@ -1,9 +1,9 @@
 import { useEffect, useState, } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 
-const QuestionCardDetails = () =>{
+const QuestionDetailsPage = () =>{
 
     const {questionId} = useParams();
     const [question,setQuestion] = useState({});
@@ -19,7 +19,7 @@ const QuestionCardDetails = () =>{
             setLoading(false)
         })
         .catch((error)=> console.log(error))
-    },[])
+    },[posting])
 
 
     const handleClick = () => {
@@ -28,7 +28,7 @@ const QuestionCardDetails = () =>{
 
         if(!posting){
         setPosting(true)
-        form.style.display = "inline"
+        form.style.display = "block"
         button.innerHTML = "Post"
         }
         else{
@@ -45,7 +45,7 @@ const QuestionCardDetails = () =>{
     return(<div>
         <NavBar/>
         {!loading ? (
-        <div  className="margin-div">
+        <div  className="margin-div question-details-div">
             <h2>{question.title}</h2>
             <h3>Posted by: {question.postedBy}</h3>
             <p>{question.description}</p>
@@ -55,7 +55,8 @@ const QuestionCardDetails = () =>{
                 return(<p>{answer}</p>)
             })}
             <form id="answer-form" style={{display: "none"}} >
-                <input type="text" value={answer} onChange={(e)=> setAnswer(e.target.value) }></input>
+                <input type="text" style={{width:"800px", height:"200px"}} value={answer} onChange={(e)=> setAnswer(e.target.value) }></input>
+                <p>{answer.length}/1000</p>
             </form>
             <button id="answer-button" onClick={handleClick}>New Answer</button>
         </div>
@@ -66,4 +67,4 @@ const QuestionCardDetails = () =>{
 
 }
 
-export default QuestionCardDetails;
+export default QuestionDetailsPage;
