@@ -1,22 +1,53 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/auth.context";
+import axios from "axios";
+import NavBar from "../components/NavBar";
+import QuestionCardSmall from "../components/QuestionCardSmall";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+
+  const API_URL = "http://localhost:5005/api/questions";
   const { isLoggedIn, user, logOut } = useContext(AuthContext);
+  const [questions, setQuestions] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    axios.get(API_URL)
+    .then((response) =>{
+      setQuestions(response.data);
+    })  
+  },[])
+
+  const goToLogin = () => {
+    navigate('/login')
+  }
+
+  const goToSignup = () => {
+    navigate('/signup')
+  }
+
+
 
   return (
     <div>
       {isLoggedIn ? (
         <div>
-        <h1>Welcome {user.name} to my app!</h1>
-        <button onClick={logOut}>Log Out</button>
+          <NavBar/>
+          <h1>Recent Questions</h1>
+          {questions.map((question, id)=>{
+            return(
+              <div key={id}>
+                  <QuestionCardSmall question={question}/>
+              </div>
+          )
+          })}
         </div>
       ) : (
         <div>
           <h1>Welcome unauntheticated user to my app!</h1> 
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
+          <button onClick={goToLogin}>Login</button>
+          <button onClick={goToSignup}>Sign Up</button>
         </div>
       )}
     </div>

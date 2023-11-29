@@ -1,24 +1,27 @@
-import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const QuestionCardSmall = (props) =>{
 
-const QuestionCard = () =>{
+    const{question} = props;
 
+    const navigate = useNavigate();
 
-    const [question,setQuestion] = useState({});
-    const Q_URL = "http://savioursavioursaviour"
+    const goToDetails = (x) => {
+        navigate(`/questions/${x}`)
+    }
 
-    axios.get(Q_URL)
-    .then((response) => {
-        setQuestion(response.data)
-    })
-    .catch((error)=> console.log(error))
-
-    return(<div>
-        <h3>Posted by: {question.postedBy}</h3>
-        <h4>Context: {question.skills}</h4>
-        <p>{question.details}</p>
-    </div>)
+    return(<div onClick={()=>goToDetails(question._id)} className="question-card">
+            <h3>{question.title}</h3>
+            <h4>Posted by: {question.postedBy}</h4>
+            <div className="skill-list">
+            {question.skills.map((skills)=>{
+                return(
+                    <p>{skills}</p>
+                )
+            })}
+            </div>
+            <p>{question.details}</p>
+        </div>)
 
 }
 
-export default QuestionCard
+export default QuestionCardSmall;

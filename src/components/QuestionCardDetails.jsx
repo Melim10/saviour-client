@@ -1,24 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState, } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import NavBar from "./NavBar";
 
-const QuestionCard = () =>{
+const QuestionCardDetails = () =>{
 
-
+    const {questionId} = useParams();
     const [question,setQuestion] = useState({});
-    const Q_URL = "http://savioursavioursaviour"
+    const API_URL = `http://localhost:5005/api/questions/${questionId}`
 
-    axios.get(Q_URL)
-    .then((response) => {
-        setQuestion(response.data)
-    })
-    .catch((error)=> console.log(error))
+    useEffect(()=>{
+        axios.get(API_URL)
+        .then((response) => {
+            setQuestion(response.data)
+            console.log(response.data)
+        })
+        .catch((error)=> console.log(error))
+    },[])
+
 
     return(<div>
+        <NavBar/>
+        <h2>{question.title}</h2>
         <h3>Posted by: {question.postedBy}</h3>
+        <p>{question.description}</p>
         <h4>Context: {question.skills}</h4>
-        <p>{question.details}</p>
     </div>)
 
 }
 
-export default QuestionCard
+export default QuestionCardDetails;
