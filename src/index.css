@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+
 *{margin: 0;
 padding: 0;
 box-sizing: border-box;
+font-family: "Noto Sans";
 }
 
+
+
+a{
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+button{
+  cursor:pointer;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

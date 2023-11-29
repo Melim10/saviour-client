@@ -13,13 +13,14 @@ const QuestionCardSmall = (props) =>{
             <h3>{question.title}</h3>
             <h4>Posted by: {question.postedBy}</h4>
             <div className="skill-list">
-            {question.skills.map((skills)=>{
+            {question.skills.length === 0 ? <p>No specific context</p> :
+            question.skills.map((skills)=>{
                 return(
                     <p>{skills}</p>
                 )
             })}
             </div>
-            <p >{question.description}</p>
+            <p className="description">{question.description}</p>
         </div>)
 
 }

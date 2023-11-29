@@ -36,17 +36,31 @@ cursor: pointer;
 box-shadow: none;
 width: 25%;
 padding: 1px;
+height: 10vh;
 
-transition: box-shadow 0.25s ease-out;
+transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 }
 
 .question-card > * {
   padding-left: 10px;
 }
 
+.question-card .description {
+  opacity: 0;
+  display: hidden;  
+  transition: opacity 1s ease;
+}
 .question-card:hover{
   box-shadow: rgba(245, 245, 245, 0.75) 1.95px 1.95px 2.6px;
+  height: 20vh;
+  scale:1.075;
+  margin: 20px auto;
 }
+
+.question-card:hover .description{
+  opacity: 1;
+}
+
 
 .skill-list{
   display: flex;
@@ -58,4 +72,13 @@ transition: box-shadow 0.25s ease-out;
 
 .question-details-div{
   width:100%;
+}
+
+.answer-card{
+  border: 1px solid whitesmoke;
+}
+
+.question-form{
+  display: flex;
+  flex-direction: column;
 }

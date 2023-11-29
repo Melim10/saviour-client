@@ -1,5 +1,6 @@
-import { useEffect, useState, } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState, } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../Context/auth.context";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 
@@ -10,7 +11,9 @@ const QuestionDetailsPage = () =>{
     const [posting, setPosting] = useState(false);
     const [answer,setAnswer] = useState("");
     const [loading, setLoading] = useState(true);
+    const {user} = useContext(AuthContext);
     const API_URL = `http://localhost:5005/api/questions/${questionId}`
+    const navigate = useNavigate();
 
     useEffect(()=>{
         axios.get(API_URL)
@@ -19,7 +22,7 @@ const QuestionDetailsPage = () =>{
             setLoading(false)
         })
         .catch((error)=> console.log(error))
-    },[posting])
+    },[posting,answer])
 
 
     const handleClick = () => {
@@ -32,31 +35,53 @@ const QuestionDetailsPage = () =>{
         button.innerHTML = "Post"
         }
         else{
-        setPosting(false)
-        const requestBody = {answers: answer}   
-        axios.put(API_URL, requestBody)
+        const requestBody = {
+            "postedBy": user.name,
+            "description": answer}  
+        
+        requestBody.description &&(
+        axios.put(`${API_URL}/answers`, requestBody))
 
         form.style.display = "none"
         button.innerHTML = "New Answer"
         setAnswer("")
+        setPosting(false)
         }
     }
+
+    const visitProfile = () => {
+            console.log(user._id)
+            navigate(`/users/${user._id}`)
+        }
 
     return(<div>
         <NavBar/>
         {!loading ? (
         <div  className="margin-div question-details-div">
             <h2>{question.title}</h2>
-            <h3>Posted by: {question.postedBy}</h3>
+            <h3 onClick={visitProfile} style={{cursor: "pointer"}}>Posted by: {question.postedBy}</h3>
             <p>{question.description}</p>
-            <h4>Context: {question.skills}</h4>
+            <div className="skill-list">
+            <h4>Context:</h4>
+            {question.skills.length === 0 ? <p>No specific context</p> :
+            question.skills.map((skills)=>{
+                return(
+                    <p>{skills}</p>
+                )
+            })}
+           </div>
             <h4>Answers:</h4>
             {question.answers.map((answer)=>{
-                return(<p>{answer}</p>)
+                return(
+                    <div className="answer-card">
+                    <h4>Posted By:{answer.postedBy}</h4>
+                    <p>{answer.description}</p>
+                    </div>
+                )
             })}
-            <form id="answer-form" style={{display: "none"}} >
-                <input type="text" style={{width:"800px", height:"200px"}} value={answer} onChange={(e)=> setAnswer(e.target.value) }></input>
-                <p>{answer.length}/1000</p>
+            <form id="answer-form" style={{display: "none", width:"60vw", height:"20vh"}} >
+                <input type="text" style={{width:"800px", height:"200px"}} value={answer} onChange={(e)=> setAnswer(e.target.value)} maxLength={500}></input>
+                <p>{answer.length}/500</p>
             </form>
             <button id="answer-button" onClick={handleClick}>New Answer</button>
         </div>

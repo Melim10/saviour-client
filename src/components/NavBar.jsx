@@ -14,7 +14,7 @@ return(
             </h1>
             <div className="nav-buttons">
                 <ul>
-                    <li><Link to="/">{user.name}</Link></li>
+                    <li><Link to={`/users/${user._id}`}>{user.name}</Link></li>
                     <li><Link to="/">Questions</Link></li>
                 </ul>
                 <button onClick={logOut}>Logout</button>

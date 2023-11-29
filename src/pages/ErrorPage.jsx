@@ -8,7 +8,7 @@ const ErrorPage = () => {
         navigate('/')
     }
 
-    return(<div>
+    return(<div className='margin-div'>
         <h1>Someting went Wrong!</h1>
         <button onClick={goToHome}>SaveMe!</button>
 
