@@ -1,26 +1,51 @@
-import { useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/auth.context";
+const API_URL = "http://localhost:5005"
 
+export default function LoginPage() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
 
-const LoginPage = () => {
+    const {storeToken, authenticateUser}=useContext(AuthContext)
 
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
-    
-    const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
+    const navigate = useNavigate()
+    const handleLoginSubmit = (e) =>{
         e.preventDefault();
-        navigate('/homepage')
+
+        const requestBody = {email, password}
+        axios.post(`${API_URL}/auth/login`, requestBody)
+        .then((response)=>{
+            storeToken(response.data.authToken)
+            authenticateUser()
+            navigate('/')
+        })
+        .catch((error)=>{
+            const errorDescription = error.response.data.message
+            setError(errorDescription)
+        })
     }
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <form onSubmit={handleLoginSubmit}> 
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+        </div>
 
-    return(<div>
-        <form onSubmit={handleSubmit}>
-            <input type="email" name="email" value={email} placeholder="Your Email" onChange={(e)=> setEmail(e.target.value)}></input>
-            <input type="password" name="password" value={password} placeholder="Your Password" onChange={(e)=> setPassword(e.target.value)} ></input>
-            <button type="submit">Go</button>
-        </form>
-    </div>)
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+        </div>
+
+        <div>
+            <button type="submit">Login</button>
+        </div>
+        {error && <p>{error}</p>}
+      </form>
+    </div>
+  );
 }
-
-export default LoginPage
