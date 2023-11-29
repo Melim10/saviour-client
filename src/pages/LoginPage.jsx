@@ -20,7 +20,7 @@ export default function LoginPage() {
         .then((response)=>{
             storeToken(response.data.authToken)
             authenticateUser()
-            navigate('/homepage')
+            navigate('/')
         })
         .catch((error)=>{
             const errorDescription = error.response.data.message

@@ -25,6 +25,7 @@ const QuestionCardDetails = () =>{
         <h3>Posted by: {question.postedBy}</h3>
         <p>{question.description}</p>
         <h4>Context: {question.skills}</h4>
+        <h4>Answers:</h4>
     </div>)
 
 }

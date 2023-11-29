@@ -19,12 +19,16 @@ function HomePage() {
     })  
   },[])
 
-  const goToLogin = () => {
+  const goToLogin = (x) => {
     navigate('/login')
   }
 
   const goToSignup = () => {
     navigate('/signup')
+  }
+
+  const makeNewQuestion = () =>{
+    navigate('/new-question')
   }
 
 
@@ -42,10 +46,30 @@ function HomePage() {
               </div>
           )
           })}
-        </div>
-      ) : (
+    <button onClick={makeNewQuestion}>Make your question!</button>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>) : (
         <div>
-          <h1>Welcome unauntheticated user to my app!</h1> 
+          <h1>Welcome to Saviour !</h1> 
           <button onClick={goToLogin}>Login</button>
           <button onClick={goToSignup}>Sign Up</button>
         </div>

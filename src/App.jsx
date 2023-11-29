@@ -7,17 +7,18 @@ import HomePage from './pages/HomePage'
 import ErrorPage from './pages/ErrorPage'
 import NavBar from './components/NavBar'
 import QuestionCardDetails from './components/QuestionCardDetails'
+import NewQuestion from './pages/NewQuestion'
 
 function App() {
 
   return (
     <div>
     <Routes>
-      <Route path="/" element={<LandingPage />}/>
+      <Route path="/" element={<HomePage />}/>
       <Route path="/signup" element={<SignUpPage/>}/>
       <Route path="/login" element={<LoginPage/>} />
-      <Route path="/homepage" element={<HomePage />}/>
       <Route path="/questions/:questionId" element={<QuestionCardDetails />}/>
+      <Route path="/new-question" element ={<NewQuestion/>} />
       <Route path="*" element={<ErrorPage/>}/>
     </Routes>
     </div>

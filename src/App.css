@@ -45,6 +45,4 @@ transition: box-shadow 0.25s ease-out;
 
 .skill-list{
   display: flex;
-  justify-content: space-evenly;
-  align-items:
 }
