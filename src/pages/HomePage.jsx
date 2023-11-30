@@ -19,7 +19,7 @@ function HomePage() {
     })  
   },[])
 
-  const goToLogin = (x) => {
+  const goToLogin = () => {
     navigate('/login')
   }
 

@@ -8,6 +8,7 @@ function SignUpPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [skills, setSkills] = useState("");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ function SignUpPage(){
         e.preventDefault();
 
         // Create a request body object
-        const requestBody = {email, password, name};
+        const requestBody = {email, password, name, skills};
 
         axios.post(`${API_URL}/auth/signup`, requestBody)
             .then(()=>{
@@ -44,6 +45,10 @@ return(
             <div> 
                 <label>Username:</label>
                 <input type="text" name="username" value={name} onChange={(e)=> setName(e.target.value)}/>
+            </div>
+            <div> 
+                <label>Skills:</label>
+                <input type="text" name="skills" value={skills} onChange={(e)=> setSkills(e.target.value)}/>
             </div>
             <div>
                 <button type="submit">Sign Up</button>

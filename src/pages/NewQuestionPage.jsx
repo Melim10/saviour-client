@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
     const [description, setDescription] = useState("");
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
-    const postedBy=user.name;
+    console.log(user.skills)
 
     const API_URL = "http://localhost:5005/api/questions"
 
@@ -51,10 +51,9 @@ import { useNavigate } from "react-router-dom";
                 </div>
                 <div className="question-form-select">
                     <p>Skill's Tags</p>
-                    <select></select>
-                    <select></select>
+                    {user.skills}
                 </div>
-                <button>Sumbit Question</button>
+                <button style={{width:"200px"}}>Sumbit Question</button>
                 </form>
         </div>
     )
