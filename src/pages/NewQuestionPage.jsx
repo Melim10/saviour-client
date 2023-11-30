@@ -2,31 +2,23 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../Context/auth.context";
 import { useNavigate } from "react-router-dom";
+import skillsList from '../assets/skillList.json'
 
-/* const questionSchema = new Schema({
-    postedBy: { type: String, required: true },
-    title: { type: String, required: true},
-    description: { type: String },
-    skills: [],
-    answers: [],
-  });
- */
+
   const NewQuestion = () => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(user.skills)
 
     const API_URL = "http://localhost:5005/api/questions"
 
 
     const handleSubmit=(e)=>{
-        const requestBody = {postedBy, title, description}
+        const requestBody = {postedBy: user.name, title, description}
         e.preventDefault();
 
-        console.log("clicked")
         axios.post(API_URL, requestBody)
         .then(()=>{
             navigate('/')
@@ -51,9 +43,19 @@ import { useNavigate } from "react-router-dom";
                 </div>
                 <div className="question-form-select">
                     <p>Skill's Tags</p>
-                    {user.skills}
-                </div>
+                    <select>
+                    {skillsList.map((skill)=>{
+                        return(<option>{skill}</option>)
+                    })}
+                    </select>
+                    <select>
+                    {skillsList.map((skill)=>{
+                        return(<option>{skill}</option>)
+                    })}
+                    </select>
                 <button style={{width:"200px"}}>Sumbit Question</button>
+
+                </div>
                 </form>
         </div>
     )

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import skillsList from '../assets/skillList.json'
+
 
 const API_URL = "http://localhost:5005";
 
@@ -8,7 +10,7 @@ function SignUpPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [skills, setSkills] = useState("");
+    const skills = [];
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -18,16 +20,29 @@ function SignUpPage(){
         e.preventDefault();
 
         // Create a request body object
-        const requestBody = {email, password, name, skills};
+        const requestBody = {email, password, name, skills: skills};
 
         axios.post(`${API_URL}/auth/signup`, requestBody)
             .then(()=>{
+                console.log(requestBody)
                 navigate('/login');
             })
             .catch((error)=>{
                 const errorDescription = error.response.data.message;
                 setError(errorDescription);
             })
+    }
+
+    const handleCheckBox = (e) =>{
+        if(skills.includes(e)){
+            const indexToRemove = skills.indexOf(e);
+            skills.splice(indexToRemove,1);
+        }
+        else{
+            skills.push(e)
+        }
+        console.log(e)
+        console.log(skills)
     }
 
 return(
@@ -46,9 +61,26 @@ return(
                 <label>Username:</label>
                 <input type="text" name="username" value={name} onChange={(e)=> setName(e.target.value)}/>
             </div>
-            <div> 
+            <div>
+                <div>
                 <label>Skills:</label>
-                <input type="text" name="skills" value={skills} onChange={(e)=> setSkills(e.target.value)}/>
+                {skillsList.map((skill)=>{
+                        return( 
+                            skill !== "none" &&
+                            <div key={skill}>
+                                <label>{skill}</label>
+                                <input type="checkbox" value={skill} onChange={(e)=>handleCheckBox(e.target.value)}></input>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div>
+                    {skills.lenght !==0 && skills.map((skill)=>{
+                        return(
+                        <p>{skill}</p>
+                        )
+                    })}
+                </div>
             </div>
             <div>
                 <button type="submit">Sign Up</button>
