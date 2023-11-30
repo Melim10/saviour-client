@@ -1,31 +1,39 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../Context/auth.context";
 import { useNavigate } from "react-router-dom";
 import skillsList from '../assets/skillList.json'
-
 
   const NewQuestion = () => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const {user} = useContext(AuthContext);
+    const skills =[];
     const navigate = useNavigate();
 
-    const API_URL = "http://localhost:5005/api/questions"
+    const API_URL = "http://localhost:5005";
+
 
 
     const handleSubmit=(e)=>{
-        const requestBody = {postedBy: user.name, title, description}
+        const requestBody = {postedBy: user.name, title, description, skills: skills}
         e.preventDefault();
+        console.log(requestBody)
 
-        axios.post(API_URL, requestBody)
+        axios.post(`${API_URL}/api/questions`, requestBody)
         .then(()=>{
             navigate('/')
         })
         .catch((error) => {
             console.log(error)
         })
+    }
+
+    const handleSelect = (e) =>{
+        console.log(e)
+        skills.push(e)
+        console.log(skills)
     }
 
     return(
@@ -43,12 +51,12 @@ import skillsList from '../assets/skillList.json'
                 </div>
                 <div className="question-form-select">
                     <p>Skill's Tags</p>
-                    <select>
+                    <select key="skill-one" onChange={(e)=>handleSelect(e.target.value)}>
                     {skillsList.map((skill)=>{
                         return(<option>{skill}</option>)
                     })}
                     </select>
-                    <select>
+                    <select key="skill-two" onChange={(e)=>handleSelect(e.target.value)}>
                     {skillsList.map((skill)=>{
                         return(<option>{skill}</option>)
                     })}
@@ -58,7 +66,7 @@ import skillsList from '../assets/skillList.json'
                 </div>
                 </form>
         </div>
-    )
-  }
+  );
+};
 
-  export default NewQuestion;
+export default NewQuestion;
