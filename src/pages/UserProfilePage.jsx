@@ -26,18 +26,13 @@ const UserProfilePage = () => {
       });
   }, []);
 
-  const handleRemoveSkill = async (skillToRemove) => {
-    try {
-      // Make an API request to remove the skill from the server
-      await axios.put(API_URL, { skill: skillToRemove });
-
-      // Update the state to reflect the removal
-      setSkills((prevSkills) =>
-        prevSkills.filter((skill) => skill !== skillToRemove)
-      );
-    } catch (error) {
+  const handleRemoveSkill = (skillToRemove) => {
+    console.log("clicked")
+     axios.put(`${API_URL}/skills`, { skills: skillToRemove })
+       
+    .catch ((error) =>{
       console.error('Error removing skill:', error);
-    }
+    })
   };
 
   return (
