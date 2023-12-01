@@ -10,17 +10,23 @@ const QuestionCardSmall = (props) =>{
     }
 
     return(<div onClick={()=>goToDetails(question._id)} className="question-card">
-            <h3>{question.title}</h3>
-            <h4>Posted by: {question.postedBy}</h4>
-            <div className="skill-list">
-            {question.skills.length === 0 ? <p>No specific context</p> :
-            question.skills.map((skills)=>{
-                return(
-                    <p>{skills}</p>
-                )
-            })}
+            <div className="card-header">
+                <h2>{question.title}</h2>
+                <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}></img>
             </div>
-            <p className="description">{question.description}</p>
+            <div className="card-content">
+                <h4>Posted by: {question.postedBy}</h4>
+                <p className="small-text">{question.when}</p>
+            </div>
+            <div className="skill-list">
+                {question.skills.length === 0 ? <p>No specific context</p> :
+                question.skills.map((skills, index)=>{
+                    return(
+                        <p key={index}>{skills}</p>
+                    )
+                })}
+            </div>
+            <p className="card-description">{question.description}</p>
         </div>)
 
 }

@@ -1,45 +1,31 @@
-import { useState, useContext, useEffect } from "react";
-import axios from "axios";
-import { AuthContext } from "../Context/auth.context";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import skillsList from '../assets/skillList.json'
+import { AuthContext } from "../Context/auth.context";
+import axios from "axios";
 import dateGenerator from "../components/dateGenerator";
+import skillsList from '../assets/skillList.json'
 
-  const NewQuestion = () => {
-
+const EditQuestionForm = (props) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const {user} = useContext(AuthContext);
     const skills =[];
     const navigate = useNavigate();
     const date = dateGenerator();
+    const {questionId} = props;
 
     const API_URL = "http://localhost:5005";
 
-
-
-    const handleSubmit=(e)=>{
-        const requestBody = {postedBy: user.name, title, description, skills: skills, when: date}
-        e.preventDefault();
-        console.log(requestBody)
-        console.log("clicked!")
-
-        axios.post(`${API_URL}/api/questions`, requestBody)
-        .then(()=>{
-            navigate('/')
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    const handleSelect = () => {
+        console.log("editing")
     }
 
-    const handleSelect = (e) =>{
-        console.log(e)
-        skills.push(e)
-        console.log(skills)
+    const handleSubmit = () =>{
+        navigate(`/`)
     }
-
+    
     return(
+    
         <div className="margin-div">
             <form className="question-form" onSubmit={handleSubmit}>
                 <div className="question-form-title">
@@ -64,7 +50,7 @@ import dateGenerator from "../components/dateGenerator";
                         return(<option>{skill}</option>)
                     })}
                     </select>
-                <button style={{width:"200px"}}>Sumbit Question</button>
+                <button style={{width:"200px"}}> Done</button>
 
                 </div>
                 </form>
@@ -72,4 +58,4 @@ import dateGenerator from "../components/dateGenerator";
   );
 };
 
-export default NewQuestion;
+export default EditQuestionForm;

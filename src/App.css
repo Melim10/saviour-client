@@ -36,7 +36,7 @@ cursor: pointer;
 box-shadow: none;
 width: 25%;
 padding: 1px;
-height: 10vh;
+height: 11vh;
 
 transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 }
@@ -45,10 +45,12 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   padding-left: 10px;
 }
 
-.question-card .description {
+.card-description{
   opacity: 0;
   display: hidden;  
-  transition: opacity 1s ease;
+  transition: opacity 0.5s ease-out;
+  margin-top:2%;
+
 }
 .question-card:hover{
   box-shadow: rgba(245, 245, 245, 0.75) 1.95px 1.95px 2.6px;
@@ -57,7 +59,7 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   margin: 20px auto;
 }
 
-.question-card:hover .description{
+.question-card:hover .card-description{
   opacity: 1;
 }
 
@@ -81,4 +83,33 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 .question-form{
   display: flex;
   flex-direction: column;
+}
+
+.card-header{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+
+.card-header img{
+  width: 20px;
+  height: 20px;
+  margin-right: 5%;
+}
+
+.answers-div{
+  margin-top: 5%;
+}
+
+.small-text{
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+.card-content{
+  display:flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: baseline;
 }

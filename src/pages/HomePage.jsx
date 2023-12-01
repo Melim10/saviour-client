@@ -12,6 +12,7 @@ function HomePage() {
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(()=>{
     axios.get(API_URL)
     .then((response) =>{
@@ -46,26 +47,6 @@ function HomePage() {
               </div>
           )
           })}
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>) : (
         <div>
           <h1>Welcome to Saviour !</h1> 
