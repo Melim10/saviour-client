@@ -6,8 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function EditProfileForm() {
     const navigate = useNavigate()
     const {userId} = useParams();
-    const [name, setName] = useState("")
-    const [password, setPassword] = useState("")
     const [skills, setSkills] = useState("")
     const [picture, setPicture] = useState("")
 
@@ -16,7 +14,7 @@ export default function EditProfileForm() {
         e.preventDefault();
 
         // Create a request body object
-        const requestBody = {name, password, skills, picture};
+        const requestBody = { skills, picture};
 
         axios.put(`${API_URL}/api/users/${userId}`, requestBody)
         .then(()=>{
@@ -30,15 +28,6 @@ export default function EditProfileForm() {
   return (
     <div>
       <form onSubmit={handleEditSubmit}>
-        <div>
-        <label>Name</label>
-        <input type="text" name="name" value={name} onChange={(e)=>{setName(e.target.value)}}/>
-        </div>
-
-        <div>
-        <label>Password</label>
-        <input type="password" name="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} />
-        </div>
 
         <div>
         <label>Skills</label>
