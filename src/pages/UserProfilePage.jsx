@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import EditProfileForm from "../components/EditProfileForm";
-
 const UserProfilePage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState({});
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(true);
   const [skills, setSkills] = useState([]);
-
   const API_URL = `http://localhost:5005/api/users/${userId}`;
-
   useEffect(() => {
     axios
       .get(API_URL)
@@ -25,16 +22,16 @@ const UserProfilePage = () => {
         console.error(error);
       });
   }, []);
-
   const handleRemoveSkill = (skillToRemove) => {
-    console.log("clicked")
-     axios.put(`${API_URL}/skills`, { skills: skillToRemove })
-       
+    const requestBody = {skill: skillToRemove }
+    axios.put(`${API_URL}/skills`, requestBody)
+    .then((response)=>{
+      setSkills(response.data.skills);
+    })
     .catch ((error) =>{
       console.error('Error removing skill:', error);
     })
   };
-
   return (
     <div className="margin-div">
       {!loading ? (
@@ -70,5 +67,4 @@ const UserProfilePage = () => {
     </div>
   );
 };
-
 export default UserProfilePage;
