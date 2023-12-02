@@ -79,6 +79,7 @@ const QuestionDetailsPage = () =>{
         <div  className="margin-div question-details-div">
             <div className="card-header">
             <h2>{question.title}</h2>
+            <img src={question.solved?'/solved.png':'/notSolved.png'}/>
             {canEdit?
             <img className="edit-question-icon" onClick={editQuestion}src={'/edit.png'} style={{backgroundColor: "whitesmoke"}}></img>
             :
@@ -116,7 +117,14 @@ const QuestionDetailsPage = () =>{
             </form>
             <button id="new-answer-button" onClick={handleClick}>New Answer</button>
             </div>
-            {edit && <EditQuestionForm questionId={questionId}/>}
+            {edit && 
+            <EditQuestionForm 
+            questionId={questionId} 
+            postedBy={question.postedBy} 
+            defaultTitle={question.title} 
+            defaultDescription={question.description} 
+            defaultSolved={question.solved}
+            />}
         </div>
         )
         :(
