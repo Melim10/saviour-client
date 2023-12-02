@@ -9,6 +9,7 @@ const UserProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [skills, setSkills] = useState([]);
   const API_URL = `http://localhost:5005/api/users/${userId}`;
+
   useEffect(() => {
     axios
       .get(API_URL)
@@ -22,6 +23,7 @@ const UserProfilePage = () => {
         console.error(error);
       });
   }, []);
+
   const handleRemoveSkill = (skillToRemove) => {
     const requestBody = {skill: skillToRemove }
     axios.put(`${API_URL}/skills`, requestBody)
@@ -44,9 +46,10 @@ const UserProfilePage = () => {
                   {skills.map((skill, index) => (
                     <li key={index}>
                       {skill}
+                      {edit &&
                       <button onClick={() => handleRemoveSkill(skill)}>
                         Remove
-                      </button>
+                      </button>}
                     </li>
                   ))}
           </ul>
@@ -59,7 +62,7 @@ const UserProfilePage = () => {
               Edit Profile
             </button>
           )}
-          {edit && <EditProfileForm />}
+          {edit && <EditProfileForm defaultSkills={skills}/>}
         </div>
       ) : (
         <h1>Loading</h1>
