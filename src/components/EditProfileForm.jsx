@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const API_URL = "http://localhost:5005"
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,11 +9,9 @@ export default function EditProfileForm(props) {
     const {userId} = useParams();
     const [picture, setPicture] = useState("");
     const {defaultSkills} = props;
-    const [render,setRender] = useState(true)
-    let skillsToPush =[...defaultSkills];
-
+    let skillsToPush =[];
     console.log("START:", skillsToPush)
-    
+
     
 
     const handleEditSubmit = (e) => {
@@ -38,10 +36,11 @@ export default function EditProfileForm(props) {
           const indexToRemove = skillsToPush.indexOf(e);
           skillsToPush.splice(indexToRemove,1);
       }
-      else{
+      else if (!defaultSkills.includes(e)){
         skillsToPush.push(e)
       }
       console.log("SELECTED", e)
+      console.log("Original Skills are", defaultSkills)
       console.log("ARRAY IS NOW", skillsToPush)
 
   }
@@ -54,8 +53,8 @@ export default function EditProfileForm(props) {
                   return( 
                       skill !== "none" &&
                       <div key={skill} style={{display: "flex"}}>
-                          <label style={{display:`${!skillsToPush.includes(skill)?"block":"none"}`}} >{skill} </label>
-                          <input type="checkbox" value={skill} onChange={(e)=>handleCheckBox(e.target.value)} style={{display:`${!skillsToPush.includes(skill)?"block":"none"}`}}></input>
+                          <label style={{display:`${!defaultSkills.includes(skill)?"block":"none"}`}} >{skill} </label>
+                          <input type="checkbox" value={skill} onChange={(e)=>handleCheckBox(e.target.value)} style={{display:`${!defaultSkills.includes(skill)?"block":"none"}`}}></input>
                       </div>
                   )
               })}

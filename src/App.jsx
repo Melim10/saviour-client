@@ -8,6 +8,7 @@ import NavBar from './components/NavBar'
 import NewQuestion from './pages/NewQuestionPage'
 import QuestionDetailsPage from './pages/QuestionDetailsPage'
 import UserProfilePage from './pages/UserProfilePage'
+import MyQuestions from './pages/MyQuestionsPage'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />}/>
+        <Route path="/my-questions" element={<MyQuestions />}/>
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/questions/:questionId" element={<QuestionDetailsPage />}/>

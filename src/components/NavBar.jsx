@@ -15,7 +15,8 @@ return(
             <div className="nav-buttons">
                 <ul>
                     <li><Link to={`/users/${user._id}`}>{user.name}</Link></li>
-                    <li><Link to="/">Questions</Link></li>
+                    <li><Link to="/">AllQuestions</Link></li>
+                    <li><Link to="/my-questions">MyQuestions</Link></li>
                 </ul>
                 <button onClick={logOut}>Logout</button>
             </div>

@@ -48,6 +48,8 @@ const EditQuestionForm = (props) => {
     
         <div className="margin-div">
             <form className="question-form" onSubmit={handleSubmit}>
+            <button onClick={handleSolved}>Solved?</button>
+
                 <div className="question-form-title">
                     <input placeholder="Question Title" type="text" name="title" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={35}
                     style={{width:"20vw"}}/>
@@ -79,7 +81,6 @@ const EditQuestionForm = (props) => {
                 </div>
                 <div style={{display: "flex"}}>
                 <button type="submit" > Done</button>
-                <button onClick={handleSolved}>Solved?</button>
                 </div>
                 </form>
         </div>

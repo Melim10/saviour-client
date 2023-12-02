@@ -1,6 +1,9 @@
 const formatData = (x) => {
-    if (x.length === 1) {return (`0${x}`)}
-    return x
+    let output = x.toString();
+    if (output.length === 1) {
+        output = `0${output}`;
+    }
+    return output;
 }
 
 const dateGenerator = () =>{
@@ -8,7 +11,7 @@ const dateGenerator = () =>{
     const now = new Date();
     const day = now.getDate();
     const hours = now.getHours();
-    const minutes = formatData(now.getMinutes())
+    const minutes = formatData(now.getMinutes());
     const monthNames = [
     'January', 'February', 'March', 'April',
     'May', 'June', 'July', 'August',
