@@ -42,14 +42,21 @@ const EditQuestionForm = (props) => {
     const handleSolved = () =>{
         setSolved(!solved);
     }
+
+    const handleDelete = () =>{
+        axios.delete(`${API_URL}/api/questions/${questionId}`)
+        .then(navigate('/'))
+    }
     
     
     return(
     
         <div className="margin-div">
             <form className="question-form" onSubmit={handleSubmit}>
-            <button onClick={handleSolved}>Solved?</button>
-
+                <div>
+                    <button onClick={handleSolved}>Solved?</button>
+                    <button onClick={handleDelete}>Delete?</button>
+                </div>  
                 <div className="question-form-title">
                     <input placeholder="Question Title" type="text" name="title" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={35}
                     style={{width:"20vw"}}/>
