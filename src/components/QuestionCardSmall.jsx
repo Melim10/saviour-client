@@ -13,7 +13,7 @@ const QuestionCardSmall = (props) =>{
 
     return(<div onClick={()=>goToDetails(question._id)} className="question-card">
             <div className="card-header">
-                <h2>{question.title}</h2>
+                <h3>{question.title}</h3>
                 <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}></img>
             </div>
             <div className="card-content">

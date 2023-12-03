@@ -36,7 +36,7 @@ cursor: pointer;
 box-shadow: none;
 width: 100%;
 padding: 1px;
-height: 11vh;
+height: 15vh;
 
 transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 }

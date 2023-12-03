@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import QuestionCardSmall from "../components/QuestionCardSmall";
-import { useNavigate, Link} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../Context/auth.context";
 
 function HomePage() {
 
   const API_URL = "http://localhost:5005/api/questions";
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
+  const {user} = useContext(AuthContext)
+  console.log(user)
 
 
   useEffect(()=>{
