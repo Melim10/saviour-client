@@ -28,7 +28,7 @@ export default function LoginPage() {
         })
     }
   return (
-    <div>
+    <div className="margin-div">
       <h1>Login Page</h1>
       <form onSubmit={handleLoginSubmit}> 
         <div>

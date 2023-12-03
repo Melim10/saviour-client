@@ -18,15 +18,15 @@ nav > * {
 nav ul{
   display:flex;
   justify-content: space-between;
-  width: 30rem;
+  width: 10rem;
   list-style: none;
 }
 
 .nav-buttons{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  width: 40rem;
+  width: fit-content
 }
 
 .question-card{
@@ -34,7 +34,7 @@ border: 1px solid white;
 margin: 10px auto;
 cursor: pointer;
 box-shadow: none;
-width: 25%;
+width: 100%;
 padding: 1px;
 height: 11vh;
 
@@ -70,10 +70,21 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 
 .margin-div{
   margin-top: 10vh;
+  margin-left:auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.card-list{
+  width: 60%;
+  margin: 10vh auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .question-details-div{
-  width:100%;
+  width:75%;
 }
 
 .answer-card{
@@ -88,8 +99,14 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 .card-header{
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
 }
+
+.card-header-icons-div{
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;}
 
 
 .card-header img{
@@ -112,4 +129,68 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   justify-content: space-between;
   width: 80%;
   align-items: baseline;
+}
+
+.new-question-button{
+  width:33%;
+  height:5vh;
+  margin: 0 auto;
+}
+
+
+
+.nav-buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40rem;
+}
+
+.hidden{
+height: 2vh;
+opacity: 0;
+pointer-events: none;
+}
+
+#hidden-list{
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: fit-content;
+  padding: 1%;
+  margin-top: 2.5vh;
+  transition: height 0.75s linear,
+  opacity 0.75s linear;
+  background: rgb(245,245,245);
+  background: linear-gradient(0deg, rgba(245,245,245, 0.15) 0%, rgba(245,245,245,0.05) 100%);
+}
+
+.not-hidden{
+  height:20vh;
+  opacity: 1;
+}
+
+.clickable{
+  box-sizing: content-box;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(245, 245, 245, 0);
+  box-sizing: content-box;
+  padding: 5px;
+  scale: 1;
+  transition: scale 0.75 ease;
+  cursor: pointer;
+ 
+}
+
+.clickable:hover{
+  scale: 1.25;
+}
+
+.clickable:active{
+  scale: 1;
+}
+
+.hr{
+  margin: 5px 0;
+  width: 80%;
 }

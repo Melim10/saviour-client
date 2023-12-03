@@ -16,10 +16,8 @@ export default function EditProfileForm(props) {
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
-        console.log("SKILLSTOPUSH:",skillsToPush)
 
         const requestBody = { skills: skillsToPush, picture: picture || "https://cdn1.iconfinder.com/data/icons/user-interface-664/24/User-512.png"};
-        console.log("REQUESTBODY:", requestBody)
 
         axios.put(`${API_URL}/api/users/${userId}`, requestBody)
         .then(()=>{
@@ -39,10 +37,6 @@ export default function EditProfileForm(props) {
       else if (!defaultSkills.includes(e)){
         skillsToPush.push(e)
       }
-      console.log("SELECTED", e)
-      console.log("Original Skills are", defaultSkills)
-      console.log("ARRAY IS NOW", skillsToPush)
-
   }
 
   return (

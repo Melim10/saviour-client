@@ -20,27 +20,18 @@ function MyQuestions() {
     })  
   },[])
 
-  const goToLogin = () => {
-    navigate('/login')
-  }
-
-  const goToSignup = () => {
-    navigate('/signup')
-  }
-
   const makeNewQuestion = () =>{
-    navigate('/new-question')
+    navigate('/')
   }
 
   console.log(user.name)
 
 
   return (
-    <div className="margin-div">
-      {isLoggedIn ? (
-        <div>
-          <h1>Recent Questions</h1>
-          <button onClick={makeNewQuestion}>Make your question!</button>
+    <div className="card-list">
+          <h1>My Questions</h1>
+          <button className="new-question-button" onClick={makeNewQuestion}
+          >New question!</button>
           {questions
             .filter((question) => question.postedBy === `${user.name}`)
             .map((question, id) => {
@@ -50,16 +41,9 @@ function MyQuestions() {
               </div>
               )
             })}
-        </div>
-      ) : (
-        <div>
-          <h1>Welcome to Saviour!</h1>
-          <button onClick={goToLogin}>Login</button>
-          <button onClick={goToSignup}>Sign Up</button>
-        </div>
-      )}
     </div>
   );
 }
 
 export default MyQuestions;
+

@@ -46,7 +46,7 @@ function SignUpPage(){
     }
 
 return(
-    <div>
+    <div className='margin-div'>
         <h1>Sign-up Page</h1>
         <form onSubmit = {handleSignUpSubmit}>
             <div> 
