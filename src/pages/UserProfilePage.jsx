@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import EditProfileForm from "../components/EditProfileForm";
-const UserProfilePage = () => {
+  const UserProfilePage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState({});
   const [edit, setEdit] = useState(false);
@@ -16,7 +16,6 @@ const UserProfilePage = () => {
       .then((response) => {
         setUser(response.data);
         setLoading(false);
-        console.log(response.data.skills)
         setSkills(response.data.skills)
       })
       .catch((error) => {
@@ -40,7 +39,7 @@ const UserProfilePage = () => {
         <div>
           <h1>{user.name}</h1>
           <img src={user.picture}></img>
-          <p>{user.email}</p>
+          <p>Email: {user.email}</p>
           Skills:
           <ul>
                   {skills.map((skill, index) => (
@@ -62,7 +61,7 @@ const UserProfilePage = () => {
               Edit Profile
             </button>
           )}
-          {edit && <EditProfileForm defaultSkills={skills}/>}
+          {edit && <EditProfileForm defaultSkills={skills} defaultPicture={user.picture}/>}
         </div>
       ) : (
         <h1>Loading</h1>

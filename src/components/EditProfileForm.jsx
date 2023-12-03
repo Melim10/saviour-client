@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 const API_URL = "http://localhost:5005"
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import skillsList from '../assets/skillList.json'
+import { useContext } from "react";
+import { AuthContext } from "../Context/auth.context";
 
 export default function EditProfileForm(props) {
+    const {user} = useContext(AuthContext)
     const navigate = useNavigate();
     const {userId} = useParams();
-    const [picture, setPicture] = useState("");
-    const {defaultSkills} = props;
+    const [picture, setPicture] = useState(``);
+    const {defaultSkills, defaultPicture} = props;
     let skillsToPush =[];
-    console.log("START:", skillsToPush)
+
+
+    useEffect(()=>{
+      setPicture(defaultPicture)
+    },[])
 
     
 

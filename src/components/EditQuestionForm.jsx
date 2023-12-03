@@ -1,13 +1,11 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/auth.context";
 import axios from "axios";
 import skillsList from '../assets/skillList.json'
 
 const EditQuestionForm = (props) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const {user} = useContext(AuthContext);
     const [skill1, setSkill1] = useState("");
     const [skill2, setSkill2] = useState("");
     const [solved, setSolved] = useState('');
@@ -21,11 +19,10 @@ const EditQuestionForm = (props) => {
         setSkill1(defaultSkill1);
         setSkill2(defaultSkill2);
         setSolved(defaultSolved)
-        console.log(title, description)
     },[])
 
     const API_URL = "http://localhost:5005";
-
+    
     const requestBody = {
         postedBy: postedBy,
         title: title,
@@ -39,24 +36,10 @@ const EditQuestionForm = (props) => {
         navigate(`/`)
     }
 
-    const handleSolved = () =>{
-        setSolved(!solved);
-    }
-
-    const handleDelete = () =>{
-        axios.delete(`${API_URL}/api/questions/${questionId}`)
-        .then(navigate('/'))
-    }
-    
-    
     return(
     
         <div className="margin-div">
             <form className="question-form" onSubmit={handleSubmit}>
-                <div>
-                    <button onClick={handleSolved}>Solved?</button>
-                    <button onClick={handleDelete}>Delete?</button>
-                </div>  
                 <div className="question-form-title">
                     <input placeholder="Question Title" type="text" name="title" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={35}
                     style={{width:"20vw"}}/>

@@ -2,12 +2,8 @@ import { useContext, useEffect, useState, } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/auth.context";
 import axios from "axios";
-import NavBar from "../components/NavBar";
 import dateGenerator from "../components/dateGenerator";
 import EditQuestionForm from "../components/EditQuestionForm";
-
-
-
 
 const QuestionDetailsPage = () =>{
     const {questionId} = useParams();
@@ -19,7 +15,10 @@ const QuestionDetailsPage = () =>{
     const [loading, setLoading] = useState(true);
     const [canEdit, setCanEdit] = useState(false);
     const [edit,setEdit] = useState(false)
+    const [solved, setSolved] = useState(question.solved);
+
     const navigate = useNavigate();
+
     useEffect(() => {
         axios
           .get(API_URL)
@@ -28,7 +27,7 @@ const QuestionDetailsPage = () =>{
             setLoading(false);
           })
           .catch((error) => console.log(error));
-      }, []);
+      }, [solved]);
 
       useEffect(()=>{
         (isLoggedIn &&
@@ -49,7 +48,8 @@ const QuestionDetailsPage = () =>{
         const requestBody = {
             "postedBy": user.name,
             "when": dateGenerator(),
-            "description": answer}  
+            "description": answer,
+            "cool": false}
         
         requestBody.description &&(
         axios.put(`${API_URL}/answers`, requestBody))
@@ -74,22 +74,46 @@ const QuestionDetailsPage = () =>{
         setEdit(!edit)
     }
 
+    const handleSolved = () =>{
+        console.log(question.solved)
+        setSolved(!question.solved);
+        const requestBody = {
+            postedBy: question.postedBy,
+            title: question.title,
+            skills: question.skills,
+            description: question.description,
+            solved: !question.solved
+        }
 
+        axios.put(API_URL, requestBody)
+        .then(
+            navigate('/')
+        )
+        .catch((error) => console.log(error))
+    }
+
+    const handleDelete = () =>{
+        axios.delete(API_URL)
+        .then(navigate('/'))
+    }
 
     return(<div>
-        <NavBar/>
-        {!loading ? (
+        {!loading ?  (
         <div  className="margin-div question-details-div card-list">
             <div className="card-header">
-            <h2>{question.title}</h2>
-            <div className="card-header-icons-div">
-            <img src={question.solved?'/solved.png':'/notSolved.png'}/>
-            {canEdit?
-            <img className="clickable" onClick={editQuestion}src={'/edit.png'}></img>
+                <div>
+                    <h2>{question.title}</h2>
+                    <img src={question.solved?'/solved.png':'/notSolved.png'}/>
+                </div>
+                {canEdit?
+                <div className="clickable-list">
+                    <img className="clickable" onClick={editQuestion}src={'/edit.png'}></img>
+                    <img className="clickable" onClick={handleSolved}src={'/check.png'}></img>
+                    <img className="clickable" onClick={handleDelete}src={'/bin.png'}></img>
+            </div>
             :
             ""
             }
-            </div>
             </div>
             <p>Posted by: {question.postedBy}</p>
             <div className="skill-list">

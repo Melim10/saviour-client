@@ -9,6 +9,8 @@ const QuestionCardSmall = (props) =>{
         navigate(`/questions/${x}`)
     }
 
+
+
     return(<div onClick={()=>goToDetails(question._id)} className="question-card">
             <div className="card-header">
                 <h2>{question.title}</h2>
@@ -22,7 +24,7 @@ const QuestionCardSmall = (props) =>{
                 {question.skills.length === 0 ? <p>No specific context</p> :
                 question.skills.map((skills, index)=>{
                     return(
-                        <p key={index}>{skills}</p>
+                        <p key={index} className="skill-label">{skills}</p>
                     )
                 })}
             </div>

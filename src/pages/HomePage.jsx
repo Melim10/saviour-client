@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Context/auth.context";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import QuestionCardSmall from "../components/QuestionCardSmall";
 import { useNavigate, Link} from "react-router-dom";
@@ -7,7 +6,6 @@ import { useNavigate, Link} from "react-router-dom";
 function HomePage() {
 
   const API_URL = "http://localhost:5005/api/questions";
-  const { isLoggedIn, user, logOut } = useContext(AuthContext);
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
 

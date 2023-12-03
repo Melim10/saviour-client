@@ -98,6 +98,7 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 
 .card-header{
   display: flex;
+  flex-direction: column;
   align-items: baseline;
 }
 
@@ -136,8 +137,6 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   height:5vh;
   margin: 0 auto;
 }
-
-
 
 .nav-buttons{
   display: flex;
@@ -190,7 +189,31 @@ pointer-events: none;
   scale: 1;
 }
 
+.clickable-list{
+  display: flex;
+}
+
 .hr{
   margin: 5px 0;
   width: 80%;
 }
+
+.skill-label{
+  border: 1px solid whitesmoke;
+  padding: 1px;
+  font-size: 0.75em;
+}
+
+.skill-label{
+  border: 1px solid whitesmoke;
+  padding: 2px;
+  margin: 2px;
+}
+
+.link-to-profile{
+  cursor: pointer;
+}
+
+.link-to-profile:hover{
+  text-decoration: underline;
+} 
