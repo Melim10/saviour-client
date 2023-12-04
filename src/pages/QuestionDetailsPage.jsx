@@ -99,7 +99,7 @@ const QuestionDetailsPage = () =>{
 
     return(<div>
         {!loading ?  (
-        <div  className="margin-div question-details-div card-list">
+        <div  className="margin-div card-list">
             <div className="card-header">
                 <div>
                     <h2>{question.title}</h2>
@@ -121,7 +121,7 @@ const QuestionDetailsPage = () =>{
             {question.skills.length === 0 ? <p>No specific context</p> :
             question.skills.map((skills)=>{
                 return(
-                    <p>{skills}</p>
+                    <p className="skill-label">{skills}</p>
                 )
             })}
            </div>
@@ -132,7 +132,7 @@ const QuestionDetailsPage = () =>{
             {question.answers.map((answer)=>{
                 return(
                     <div className="answer-card">
-                    <h3>Posted By: {answer.postedBy}</h3>
+                    <h4>Posted By: {answer.postedBy}</h4>
                     <p className="small-text">{answer.when}</p>
                     <p>{answer.description}</p>
                     </div>
