@@ -29,6 +29,7 @@ nav ul{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 50vh;
 }
 
 .question-card{
@@ -141,26 +142,26 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   margin: 0 auto;
 }
 
-.hidden{
-height: 2vh;
-opacity: 0;
-pointer-events: none;
-}
+
 
 #hidden-list{
   justify-content: space-evenly;
   flex-direction: column;
-  width: fit-content;
   padding: 1%;
-
   transition: height 0.75s linear,
   opacity 0.75s linear;
   background: rgb(245,245,245);
   background: linear-gradient(0deg, rgba(245,245,245, 0.15) 0%, rgba(245,245,245,0.05) 100%);
 }
 
+.hidden{
+  height: 2vh;
+  opacity: 0;
+  pointer-events: none;
+  }
+
 .not-hidden{
-  height:20vh;
+  height: 100vh;
   opacity: 1;
 }
 

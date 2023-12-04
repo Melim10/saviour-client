@@ -23,9 +23,9 @@ const QuestionCardSmall = (props) =>{
             <div className="skill-list">
                 {question.skills.length === 0 ? <p>No specific context</p> :
                 question.skills.map((skills, index)=>{
-                    return(
-                        <p key={index} className="skill-label">{skills}</p>
-                    )
+                    return (
+                        skills !== "none" ? <p key={index} className="skill-label">{skills}</p> : null
+                      );
                 })}
             </div>
             <p className="card-description">{question.description}</p>
