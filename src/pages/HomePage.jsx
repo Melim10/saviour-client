@@ -26,7 +26,6 @@ function HomePage() {
   }
 
 
-
   return (
 
     <div className="card-list">

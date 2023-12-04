@@ -62,7 +62,10 @@ const QuestionDetailsPage = () =>{
             "cool": false}
         
         requestBody.description &&(
-        axios.put(`${API_URL}/answers`, requestBody))
+        axios.post(`${API_URL}/addAnswer`, requestBody))
+        .then(console.log(requestBody))
+
+
         form.style.display = "none"
         setAnswer("")
         setPosting(false)
