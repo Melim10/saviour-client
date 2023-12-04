@@ -58,12 +58,12 @@ const EditQuestionForm = (props) => {
                 </div>
                 <div className="question-form-select">
                     <p>Skill's Tags</p>
-                    <select key="skill-one" onChange={(e)=> setSkill1(e.target.value)}>
+                    <select key="skill-one" onChange={(e)=> setSkill1(e.target.value)} value={skill1}>
                     {skillsList.map((skill)=>{
                         return(<option>{skill}</option>)
                     })}
                     </select>
-                    <select key="skill-two" onChange={(e) => setSkill2(e.target.value)}>
+                    <select key="skill-two" onChange={(e)=> setSkill2(e.target.value)} value={skill2}>
                     {skillsList.map((skill)=>{
                         return(<option>{skill}</option>)
                     })}

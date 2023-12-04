@@ -14,10 +14,16 @@ const QuestionDetailsPage = () =>{
     const [answer,setAnswer] = useState("");
     const [loading, setLoading] = useState(true);
     const [canEdit, setCanEdit] = useState(false);
+    const [defaultSkill1, setDefaultSkill1] = useState("");
+    const [defaultSkill2, setDefaultSkill2] = useState("");
+
+    const [skills, setSkills] = useState({});
     const [edit,setEdit] = useState(false)
     const [solved, setSolved] = useState(question.solved);
 
     const navigate = useNavigate();
+
+    
 
     useEffect(() => {
         axios
@@ -25,6 +31,7 @@ const QuestionDetailsPage = () =>{
           .then((response) => {
             setQuestion(response.data);
             setLoading(false);
+            setSkills(response.data.skills)
           })
           .catch((error) => console.log(error));
       }, [solved]);
@@ -32,6 +39,9 @@ const QuestionDetailsPage = () =>{
       useEffect(()=>{
         (isLoggedIn &&
         checkIfCanEdit());
+        skills[0]&& setDefaultSkill1(skills[0])
+        skills[1]&& setDefaultSkill2(skills[1])
+        !skills[1]&& setDefaultSkill2("None")
       },[question,])
 
 
@@ -75,7 +85,6 @@ const QuestionDetailsPage = () =>{
     }
 
     const handleSolved = () =>{
-        console.log(question.solved)
         setSolved(!question.solved);
         const requestBody = {
             postedBy: question.postedBy,
@@ -155,6 +164,8 @@ const QuestionDetailsPage = () =>{
             defaultTitle={question.title} 
             defaultDescription={question.description} 
             defaultSolved={question.solved}
+            defaultSkill1={defaultSkill1}
+            defaultSkill2={defaultSkill2}
             />}
         </div>
         )
