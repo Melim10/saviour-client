@@ -196,12 +196,10 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 }
 
 .skill-label{
+  width: fit-content;
   border: 1px solid whitesmoke;
   padding: 1px;
   font-size: 0.75em;
-}
-
-.skill-label{
   border: 1px solid whitesmoke;
   padding: 2px;
   margin: 2px;

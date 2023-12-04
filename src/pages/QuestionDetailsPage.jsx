@@ -71,7 +71,7 @@ const QuestionDetailsPage = () =>{
     }
 
     const checkIfCanEdit = () =>{
-        if(question.postedBy === user.name){
+        if(question.userId === user._id){
             setCanEdit(true)
             console.log("User Can Edit")
         }
@@ -124,8 +124,10 @@ const QuestionDetailsPage = () =>{
             ""
             }
             </div>
+            <div style={{display:"flex"}}>
             <p>Posted by: <button onClick={()=>{navigate(`/users/${question.userId}`)}}>{question.postedBy}</button></p>
-            
+            <img className="clickable" src={'/cool.png'}/>
+            </div>
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
