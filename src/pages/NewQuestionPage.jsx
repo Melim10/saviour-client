@@ -19,7 +19,7 @@ import dateGenerator from "../components/dateGenerator";
 
 
     const handleSubmit=(e)=>{
-        const requestBody = {postedBy: user.name, title, description, skills: skills, when: date}
+        const requestBody = {postedBy: user.name, title, description, skills: skills, when: date, userId: user._id}
         e.preventDefault();
         console.log(requestBody)
         console.log("clicked!")

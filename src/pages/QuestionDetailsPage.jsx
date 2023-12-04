@@ -115,7 +115,8 @@ const QuestionDetailsPage = () =>{
             ""
             }
             </div>
-            <p>Posted by: {question.postedBy}</p>
+            <p>Posted by: <button onClick={()=>{navigate(`/users/${question.userId}`)}}>{question.postedBy}</button></p>
+            
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
