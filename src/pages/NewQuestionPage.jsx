@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../Context/auth.context";
 import { useNavigate } from "react-router-dom";
 import skillsList from '../assets/skillList.json'
-import dateGenerator from "../components/dateGenerator";
+import dateGenerator from "../utils/dateGenerator";
 
   const NewQuestion = () => {
 
@@ -21,8 +21,8 @@ import dateGenerator from "../components/dateGenerator";
     const handleSubmit=(e)=>{
         const requestBody = {postedBy: user.name, title, description, skills: skills, when: date, userId: user._id}
         e.preventDefault();
+        console.log("NEW ANSWER:")
         console.log(requestBody)
-        console.log("clicked!")
 
         axios.post(`${API_URL}/api/questions`, requestBody)
         .then(()=>{

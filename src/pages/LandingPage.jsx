@@ -15,7 +15,7 @@ const LandingPage = () => {
     }
 
 
-    return(<div>
+    return(<div style={{margin: "100px auto", boxSizing: "content-box"}}>
         <h1>Welcome to Saviour!</h1>
         <button onClick={goToLogin}>Login</button>
         <button onClick={goToSignUp}>Sign Up</button>

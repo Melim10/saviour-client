@@ -18,7 +18,7 @@ const dateGenerator = () =>{
     'September', 'October', 'November', 'December'
     ];
     const month = monthNames[now.getMonth()];
-    const actualDate= `${day}/${month} ${hours}:${minutes}`;
+    const actualDate= `${day} ${month} ${hours}:${minutes}`;
 
     return actualDate;
 }

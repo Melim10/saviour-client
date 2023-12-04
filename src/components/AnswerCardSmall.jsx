@@ -1,0 +1,28 @@
+import { useNavigate } from "react-router-dom";
+const AnswerCardSmall = (props) =>{
+
+    const{answer} = props;
+
+    const navigate = useNavigate();
+
+    const goToDetails = (x) => {
+        navigate(`/questions/${x}`)
+    }
+
+
+
+    return(<div onClick={()=>goToDetails(answer.question._id)} className="question-card">
+            <div className="card-header">
+                <h3>{answer.title}</h3>
+            </div>
+            <div className="card-content">
+                <h3>{answer.question.title}</h3>
+                <h4>Posted by: {answer.question.postedBy}</h4>
+                <p className="small-text">{answer.when}</p>
+            </div>
+            <p className="card-description">{answer.description}</p>
+        </div>)
+
+}
+
+export default AnswerCardSmall;

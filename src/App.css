@@ -156,8 +156,6 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   padding: 1%;
   transition: height 0.75s linear,
   opacity 0.75s linear;
-  background: rgb(245,245,245);
-  background: linear-gradient(0deg, rgba(245,245,245, 0.15) 0%, rgba(245,245,245,0.05) 100%);
 }
 
 .hidden{
@@ -181,7 +179,17 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   scale: 1;
   transition: scale 0.75 ease;
   cursor: pointer;
- 
+}
+
+.non-clickable{
+  box-sizing: content-box;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(245, 245, 245, 0);
+  box-sizing: content-box;
+  padding: 5px;
+  scale: 1;
+  transition: scale 0.75 ease;
 }
 
 .clickable:hover{
@@ -219,6 +227,9 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   text-decoration: underline;
 }
 
+.profile-picture{
+  width: 20vw;
+}
 
 
 

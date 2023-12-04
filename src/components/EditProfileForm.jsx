@@ -11,12 +11,16 @@ export default function EditProfileForm(props) {
     const navigate = useNavigate();
     const {userId} = useParams();
     const [picture, setPicture] = useState(``);
-    const {defaultSkills, defaultPicture} = props;
+    const [title, setTitle] = useState('')
+    const {defaultSkills, defaultPicture, defaultJobTitle} = props;
     let skillsToPush =[];
 
+    console.log("PICTURE", defaultPicture)
+    console.log("Title", defaultJobTitle)
 
     useEffect(()=>{
-      setPicture(defaultPicture)
+      setPicture(defaultPicture);
+      setTitle(defaultJobTitle);
     },[])
 
     
@@ -24,7 +28,7 @@ export default function EditProfileForm(props) {
     const handleEditSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { skills: skillsToPush, picture: picture || "https://cdn1.iconfinder.com/data/icons/user-interface-664/24/User-512.png"};
+        const requestBody = { jobTitle: title || defaultJobTitle, skills: skillsToPush, picture: picture || "https://cdn1.iconfinder.com/data/icons/user-interface-664/24/User-512.png"};
 
         axios.put(`${API_URL}/api/users/${userId}`, requestBody)
         .then(()=>{
@@ -64,6 +68,8 @@ export default function EditProfileForm(props) {
         <div>
         <label>Profile Picture</label>
         <input type="text" name="picture" value={picture} onChange={(e)=>{setPicture(e.target.value)}} />
+        <label>Current Title</label>
+        <input type="text" name="title" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
         </div>
 
         <div>

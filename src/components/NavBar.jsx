@@ -3,9 +3,9 @@ import { AuthContext } from "../Context/auth.context";
 import { Link } from "react-router-dom";
 
 const NavBar = () => { 
-    const { isLoggedIn, user, logOut } = useContext(AuthContext);
+    const { isLoggedIn, user, logOut} = useContext(AuthContext);
     const [isHidden, setIsHidden] = useState(true)
-    
+
 const toggleMenu = () => {
     setIsHidden(!isHidden)
 }

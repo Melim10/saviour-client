@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import EditProfileForm from "../components/EditProfileForm";
 import { AuthContext } from "../Context/auth.context";
+import AnswerCardSmall from "../components/AnswerCardSmall";
 
   const UserProfilePage = () => {
   const { userId } = useParams();
@@ -18,7 +19,6 @@ import { AuthContext } from "../Context/auth.context";
 
 
 
-
   useEffect(() => {
     axios
       .get(API_URL)
@@ -30,7 +30,7 @@ import { AuthContext } from "../Context/auth.context";
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [userId]);
 
   useEffect(()=>{
     checkIfCanEdit()
@@ -60,10 +60,12 @@ import { AuthContext } from "../Context/auth.context";
 
   return (
     <div className="margin-div">
-      {!loading ? (
-        <div>
+      {!loading &&
+      <div style={{display: "flex"}}>
+        <div className="profile-info">
+          <img className="profile-picture" src={editableUser.picture}></img>
           <h1>{editableUser.name}</h1>
-          <img src={editableUser.picture}></img>
+          <p>{editableUser.jobTitle}</p>
           <p>Email: {editableUser.email}</p>
           Skills:
           <ul>
@@ -71,9 +73,7 @@ import { AuthContext } from "../Context/auth.context";
                     <li key={index}>
                       <p className="skill-label">{skill}</p>
                       {edit &&
-                      <button onClick={() => handleRemoveSkill(skill)}>
-                        Remove
-                      </button>}
+                      <img src='/bin.png' className="clickable" onClick={() => handleRemoveSkill(skill)}/>}
                     </li>
                   ))}
           </ul>
@@ -86,11 +86,15 @@ import { AuthContext } from "../Context/auth.context";
               Edit Profile
             </button>
           )}
-          {edit && <EditProfileForm defaultSkills={skills} defaultPicture={user.picture}/>}
+          {edit && <EditProfileForm defaultSkills={editableUser.skills} defaultPicture={editableUser.picture} defaultJobTitle={editableUser.jobTitle}/>}
         </div>
-      ) : (
-        <h1>Loading</h1>
-      )}
+        <div><h3>{editableUser.name}'s Answers</h3>
+              {editableUser.answers.map((answer)=>{
+                return(<AnswerCardSmall answer={answer}/>)
+              })}
+        </div>
+        </div>
+      }
     </div>
   );
 };

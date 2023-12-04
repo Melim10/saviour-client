@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/auth.context";
 import axios from "axios";
-import dateGenerator from "../components/dateGenerator";
+import dateGenerator from "../utils/dateGenerator";
 import EditQuestionForm from "../components/EditQuestionForm";
 
 const QuestionDetailsPage = () =>{
@@ -16,7 +16,6 @@ const QuestionDetailsPage = () =>{
     const [canEdit, setCanEdit] = useState(false);
     const [defaultSkill1, setDefaultSkill1] = useState("");
     const [defaultSkill2, setDefaultSkill2] = useState("");
-
     const [skills, setSkills] = useState({});
     const [edit,setEdit] = useState(false)
     const [solved, setSolved] = useState(question.solved);
@@ -39,9 +38,8 @@ const QuestionDetailsPage = () =>{
       useEffect(()=>{
         (isLoggedIn &&
         checkIfCanEdit());
-        skills[0]&& setDefaultSkill1(skills[0])
-        skills[1]&& setDefaultSkill2(skills[1])
-        !skills[1]&& setDefaultSkill2("None")
+        skills[0]&& setDefaultSkill1(skills[0]);
+        skills[1]? setDefaultSkill2(skills[1]) : skills[1]&& setDefaultSkill2("None");
       },[question,])
 
 
@@ -52,7 +50,7 @@ const QuestionDetailsPage = () =>{
         }
         else{
         const requestBody = {
-            "postedBy": user.name,
+            "postedBy": user._id,
             "when": dateGenerator(),
             "description": answer,
             "cool": false}
@@ -120,7 +118,7 @@ const QuestionDetailsPage = () =>{
             ""
             }
             </div>
-            <p>Posted by: <button onClick={()=>{navigate(`/users/${question.userId}`)}}>{question.postedBy}</button></p>
+            <p onClick={()=>{navigate(`/users/${question.userId}`)}}>Posted by:<span  className="link-to-profile">{question.postedBy}</span></p>
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
@@ -133,13 +131,13 @@ const QuestionDetailsPage = () =>{
            <hr className="hr"></hr>
             <p>{question.description}</p>
            <div className="answers-div">
-            <h4>Answers:</h4>
-            {question.answers.map((answer)=>{
+            <h3>Answers:</h3>
+            {question.answers && question.answers.map((answer)=>{
                 return(
                     <div className="answer-card">
                     <div className="answer-card-header">
-                        <h4>Posted By: {answer.postedBy}</h4>
-                        <img className="clickable" src={question.cool ? '/cool.png' : '/notCool.png'}/>
+                        <h4 onClick={()=>{navigate(`/users/${answer.postedBy._id}`)}}>Posted By: <span className="link-to-profile">{answer.postedBy.name}</span></h4>
+                        <img className={canEdit? "clickable" : "non-clickable"} src={question.cool ? '/cool.png' : '/notCool.png'}/>
                     </div>
                     <p className="small-text">{answer.when}</p>
                     <p>{answer.description}</p>
