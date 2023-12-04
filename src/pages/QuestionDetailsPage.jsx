@@ -46,13 +46,9 @@ const QuestionDetailsPage = () =>{
 
 
     const handleClick = () => {
-        const form = document.getElementById('answer-form')
-        const newButton = document.getElementById('new-answer-button')
 
         if(!posting){
         setPosting(true)
-        form.style.display = "block"
-        newButton.style.display="none"
         }
         else{
         const requestBody = {
@@ -64,9 +60,6 @@ const QuestionDetailsPage = () =>{
         requestBody.description &&(
         axios.post(`${API_URL}/addAnswer`, requestBody))
         .then(console.log(requestBody))
-
-
-        form.style.display = "none"
         setAnswer("")
         setPosting(false)
         navigate('/')
@@ -127,10 +120,7 @@ const QuestionDetailsPage = () =>{
             ""
             }
             </div>
-            <div style={{display:"flex"}}>
             <p>Posted by: <button onClick={()=>{navigate(`/users/${question.userId}`)}}>{question.postedBy}</button></p>
-            <img className="clickable" src={'/cool.png'}/>
-            </div>
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
@@ -147,21 +137,24 @@ const QuestionDetailsPage = () =>{
             {question.answers.map((answer)=>{
                 return(
                     <div className="answer-card">
-                    <h4>Posted By: {answer.postedBy}</h4>
+                    <div className="answer-card-header">
+                        <h4>Posted By: {answer.postedBy}</h4>
+                        <img className="clickable" src={question.cool ? '/cool.png' : '/notCool.png'}/>
+                    </div>
                     <p className="small-text">{answer.when}</p>
                     <p>{answer.description}</p>
                     </div>
                 )
             })}
             {isLoggedIn &&(
-            <form id="answer-form" style={{display: "none", width:"60vw", height:"20vh"}} >
+            <form id="answer-form" style={{display: posting? "block" : "none", width:"60vw", height:"20vh"}} >
                 <input type="text" style={{width:"800px", height:"200px"}} value={answer} onChange={(e)=> setAnswer(e.target.value)} maxLength={500}></input>
                 <div style={{display:"flex"}}>
                 <p>{answer.length}/500</p>
                 <button id="post-answer-button" onClick={handleClick}>Post</button>
                 </div>
             </form>)}
-            {isLoggedIn && <button id="new-answer-button" onClick={handleClick}>New Answer</button>}
+            {isLoggedIn && <button style={{display: posting? "none" : "block"}} id="new-answer-button" onClick={handleClick}>New Answer</button>}
             </div>
             {edit && 
             <EditQuestionForm 
@@ -172,6 +165,7 @@ const QuestionDetailsPage = () =>{
             defaultSolved={question.solved}
             defaultSkill1={defaultSkill1}
             defaultSkill2={defaultSkill2}
+            edit={edit}
             />}
         </div>
         )

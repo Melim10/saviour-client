@@ -91,6 +91,12 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   width:75%;
 }
 
+.answer-card-header{
+  display: flex;
+  align-items: center;
+}
+
+
 .answer-card{
   border: 1px solid whitesmoke;
 }
