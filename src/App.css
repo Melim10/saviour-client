@@ -1,174 +1,3 @@
-nav{
-  display: flex;
-  position: fixed;
-  top:0;
-  left:0;
-  justify-content: space-between;
-  padding: 1rem;
-  box-shadow: rgba(245, 245, 245, 0.75) 1.95px 1.95px 2.6px;
-  background-color: #242424;
-  width:100%;
-  height: 8vh;
-}
-
-nav > * {
- padding-top: 0.5rem;
-}
-
-nav ul{
-  display:flex;
-  justify-content: space-between;
-  width: 10rem;
-  list-style: none;
-}
-
-.nav-buttons{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50vh;
-}
-
-.question-card{
-border: 1px solid white; 
-margin: 10px auto;
-cursor: pointer;
-box-shadow: none;
-width: 100%;
-padding: 1px;
-height: 15vh;
-
-transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
-}
-
-.question-card > * {
-  padding-left: 10px;
-}
-
-.card-description{
-  opacity: 0;
-  display: hidden;  
-  transition: opacity 0.5s ease-out;
-  margin-top:2%;
-
-}
-.question-card:hover{
-  box-shadow: rgba(245, 245, 245, 0.75) 1.95px 1.95px 2.6px;
-  height: 20vh;
-  scale:1.075;
-  margin: 20px auto;
-}
-
-.question-card:hover .card-description{
-  opacity: 1;
-}
-
-
-.skill-list{
-  display: flex;
-  align-items: baseline;
-}
-
-.margin-div{
-  margin-top: 10vh;
-  margin-left:auto;
-  margin-right: auto;
-  width: fit-content;
-}
-
-.card-list{
-  width: 60%;
-  margin: 10vh auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.question-details-div{
-  width:75%;
-}
-
-.answer-card-header{
-  display: flex;
-  align-items: center;
-}
-
-
-.answer-card{
-  border: 1px solid whitesmoke;
-}
-
-.question-form{
-  display: flex;
-  flex-direction: column;
-}
-
-.card-header{
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-}
-
-.card-header-icons-div{
-  margin-left: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;}
-
-
-.card-header img{
-  width: 20px;
-  height: 20px;
-  margin-right: 5%;
-}
-
-.answers-div{
-  margin-top: 5%;
-}
-
-.small-text{
-  opacity: 0.5;
-  font-size: 0.8rem;
-}
-
-.card-content{
-  display:flex;
-  justify-content: space-between;
-  width: 80%;
-  align-items: baseline;
-}
-
-.new-question-button{
-  width:33%;
-  height:5vh;
-  margin: 0 auto;
-}
-
-
-
-#hidden-list{
-  justify-content: space-evenly;
-  flex-direction: column;
-  padding: 1%;
-  transition: height 0.75s linear,
-  opacity 0.75s linear;
-}
-
-.hidden{
-  height: 2vh;
-  opacity: 0;
-  pointer-events: none;
-  }
-
-.not-hidden{
-  height: 100vh;
-  opacity: 1;
-}
-
 .clickable{
   box-sizing: content-box;
   width: 25px;
@@ -182,14 +11,9 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
 }
 
 .non-clickable{
-  box-sizing: content-box;
-  width: 25px;
-  height: 25px;
-  border: 1px solid rgba(245, 245, 245, 0);
-  box-sizing: content-box;
-  padding: 5px;
-  scale: 1;
-  transition: scale 0.75 ease;
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
 }
 
 .clickable:hover{
@@ -204,19 +28,115 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   display: flex;
 }
 
-.hr{
-  margin: 5px 0;
-  width: 80%;
+.solved-icon{
+  box-sizing: content-box;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(245, 245, 245, 0);
+  padding: 5px;
 }
 
+.card-list{
+  max-width: 50%;
+  min-width: 50%;
+  margin: 3vh auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.answer-card-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.answer-card{
+  border: 1px solid whitesmoke;
+}
+
+.profile-container{
+  margin-top: 5vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.profile-container > div{
+margin: 0 2%;
+min-width: 300px;
+}
+
+.profile-info > *:not(.profile-info-picture) {
+  padding: 1% 5%;
+}
+
+.profile-info li{
+  list-style: none;
+}
+
+.profile-info > Button{
+  margin: 0 auto;
+}
+
+.profile-info-picture{
+  margin: 0 auto;
+  border: 2px solid black;
+}
+
+
 .skill-label{
+  box-sizing:unset;
   width: fit-content;
   border: 1px solid whitesmoke;
   padding: 1px;
-  font-size: 0.75em;
+  font-size: 1em;
   border: 1px solid whitesmoke;
-  padding: 2px;
+  padding: 5px;
   margin: 2px;
+}
+
+.card-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title-div > img{
+  border:10px solid black;
+}
+
+.card-postedby{
+  text-align: right;
+  box-sizing: content-box;
+}
+
+.question-card {
+  height: 12vh;
+  opacity: 0.88;
+  transition: opacity 1s ease, height 1s ease;
+  margin: 5px;
+}
+
+.question-card:hover {
+  opacity: 1;
+  height: 17vh;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 75px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.card-description{
+  opacity:0;
+}
+
+.question-card:hover .card-description{
+  opacity: 1;
+}
+
+.skill-list{
+  display: flex;
+  align-items: baseline;
 }
 
 .link-to-profile{
@@ -227,60 +147,19 @@ transition: box-shadow 0.75s ease, height 0.75s ease, margin 0.75s ease;
   text-decoration: underline;
 }
 
-.profile-picture{
-  width: 20vw;
+.skill-to-delete{
+  display: flex;
 }
 
-
-
-  @media only screen and (max-width: 1024px) {
-  h1{
-    font-size: 1em;
-  }
-
-  h2{
-    font-size: 0.95em;
-  }
-  
-  h3{
-    font-size: 0.9em;
-  }
-
-  h4{font-size: 0.75em;}
-
-  p{font-size: 0.5em;}
-
-  .small-text{font-size: 0.45em;}
-
-  .clickable{
-    width: 10px;
-    height: 10px;
-  }
-
-  .question-card{
-    width: 100%;
-  }
- 
-  .clickable-list img{
-    width: 10px;
-    height: 10px;
-  }
-
-  .skill-label{
-    font-size: 0.5em;
-  }
-  
-  .margin-div{
-  margin-left: 5%;
-  margin-right: 5%;
-  }
-
-  .card-list {
-    width: 90%;
-    margin: 10vh auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.nav-title{
+  padding-left: 50px;
 }
- 
-}  
+
+.question-details-question{
+  width: 80%;
+  margin: 3vh auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+

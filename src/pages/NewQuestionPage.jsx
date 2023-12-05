@@ -26,7 +26,7 @@ import dateGenerator from "../utils/dateGenerator";
 
         axios.post(`${API_URL}/api/questions`, requestBody)
         .then(()=>{
-            navigate('/')
+            navigate('/my-questions')
         })
         .catch((error) => {
             console.log(error)

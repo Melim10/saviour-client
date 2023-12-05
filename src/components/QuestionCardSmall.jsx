@@ -1,4 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import Card from '@mui/material/Card';
+import { CardContent } from "@mui/material";
+import Typography from '@mui/material/Typography';
+
 const QuestionCardSmall = (props) =>{
 
     const{question} = props;
@@ -11,25 +15,40 @@ const QuestionCardSmall = (props) =>{
 
 
 
-    return(<div onClick={()=>goToDetails(question._id)} className="question-card">
+    return(
+        <Card variant="outlined"onClick={()=>goToDetails(question._id)} className="question-card">
+            <CardContent>
             <div className="card-header">
-                <h3>{question.title}</h3>
-                <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}></img>
-            </div>
-            <div className="card-content">
-                <h4>Posted by: {question.postedBy}</h4>
-                <p className="small-text">{question.when}</p>
-            </div>
-            <div className="skill-list">
+            <div className="card-title-div">
+            <Typography gutterBottom variant="h5" component="div">
+                {question.title}
+                <img className="non-clickable" src={question.solved?'/solved.png':'/notSolved.png'}></img>
+                <div className="skill-list">
                 {question.skills.length === 0 ? <p>No specific context</p> :
                 question.skills.map((skills, index)=>{
                     return (
-                        skills !== "none" ? <p key={index} className="skill-label">{skills}</p> : null
+                        skills !== "none" ? <Typography className="skill-label" variant="body2" color="text.secondary" key={index}>{skills}</Typography> : null
                       );
                 })}
             </div>
-            <p className="card-description">{question.description}</p>
-        </div>)
+            </Typography>
+            </div>
+            <div className="card-postedby">
+            <Typography gutterBottom variant="h7" component="div">
+                Posted by: <span className="link-to-profile">{question.postedBy}</span>
+            </Typography>
+            <Typography gutterBottom variant="h8" component="div">
+                {question.when}
+            </Typography>
+            </div>
+            </div>
+
+            <Typography className="card-description" variant="body2" color="text.primary">
+            {question.description}
+            </Typography>
+            </CardContent>
+  
+        </Card>)
 
 }
 

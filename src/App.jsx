@@ -1,14 +1,15 @@
 import './App.css'
 import {Routes, Route} from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
-import SignUpPage from './pages/SignUpPage'
+import SignUpPage_Styled from './pages/SignUpPage_Styled'
+import LandingPage from './pages/LandingPage'
 import HomePage from './pages/HomePage'
 import ErrorPage from './pages/ErrorPage'
-import NavBar from './components/NavBar'
 import NewQuestion from './pages/NewQuestionPage'
 import QuestionDetailsPage from './pages/QuestionDetailsPage'
 import UserProfilePage from './pages/UserProfilePage'
 import MyQuestions from './pages/MyQuestionsPage'
+import NavBar from './components/NavBar_Styled'
 
 function App() {
 
@@ -16,9 +17,11 @@ function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />}/>
+        <Route path="/" element={<LandingPage />}/>
+        <Route path="/x" element={<LoginPage />}/>
+        <Route path ="/homepage" element={<HomePage/>}/>
         <Route path="/my-questions" element={<MyQuestions />}/>
-        <Route path="/signup" element={<SignUpPage/>}/>
+        <Route path="/signup" element={<SignUpPage_Styled/>}/>
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/questions/:questionId" element={<QuestionDetailsPage />}/>
         <Route path="/new-question" element ={<NewQuestion/>} />

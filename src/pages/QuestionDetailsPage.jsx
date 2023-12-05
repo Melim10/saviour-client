@@ -4,6 +4,8 @@ import { AuthContext } from "../Context/auth.context";
 import axios from "axios";
 import dateGenerator from "../utils/dateGenerator";
 import EditQuestionForm from "../components/EditQuestionForm";
+import { Button, Card } from "@mui/material";
+import Typography from '@mui/material/Typography';
 
 const QuestionDetailsPage = () =>{
     const {questionId} = useParams();
@@ -60,7 +62,7 @@ const QuestionDetailsPage = () =>{
         .then(console.log(requestBody))
         setAnswer("")
         setPosting(false)
-        navigate('/')
+        navigate('/homepage')
         }
     }
 
@@ -90,35 +92,52 @@ const QuestionDetailsPage = () =>{
 
         axios.put(API_URL, requestBody)
         .then(
-            navigate('/')
+            navigate('/my-questions')
         )
         .catch((error) => console.log(error))
     }
 
     const handleDelete = () =>{
         axios.delete(API_URL)
-        .then(navigate('/'))
+        .then(navigate('/my-questions'))
     }
 
     return(<div>
         {!loading ?  (
-        <div  className="margin-div card-list">
-            <div className="card-header">
-                <div>
-                    <h2>{question.title}</h2>
-                    <img src={question.solved?'/solved.png':'/notSolved.png'}/>
-                </div>
+        <div  className="question-details-question">
+            <Typography gutterBottom variant="h3" component="div">
+            {question.title}
+            <div >
+            <Typography>
+                    
+                    <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}/>
+                    {canEdit?
+                <div className="clickable-list">
+                    <img className="clickable" onClick={handleSolved}src={'/check.png'}></img>
+            </div>
+            :
+            ""
+            }
+                </Typography>
                 {canEdit?
                 <div className="clickable-list">
                     <img className="clickable" onClick={editQuestion}src={'/edit.png'}></img>
-                    <img className="clickable" onClick={handleSolved}src={'/check.png'}></img>
                     <img className="clickable" onClick={handleDelete}src={'/bin.png'}></img>
             </div>
             :
             ""
             }
             </div>
+            </Typography>
+            
+            <Card variant="elevation">
+       
+            <Typography gutterBottom variant="h7" component="div">
             <p onClick={()=>{navigate(`/users/${question.userId}`)}}>Posted by:<span  className="link-to-profile">{question.postedBy}</span></p>
+            </Typography>
+            <Typography gutterBottom variant="h8" component="div">
+                {question.when}
+            </Typography>
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
@@ -128,20 +147,21 @@ const QuestionDetailsPage = () =>{
                 )
             })}
            </div>
-           <hr className="hr"></hr>
             <p>{question.description}</p>
+            </Card>
            <div className="answers-div">
-            <h3>Answers:</h3>
+            
+           <Typography gutterBottom variant="h6" component="div" className="card-header">Answers:</Typography>
             {question.answers && question.answers.map((answer)=>{
                 return(
-                    <div className="answer-card">
+                    <Card variant="outlined" className="answer-card">
                     <div className="answer-card-header">
                         <h4 onClick={()=>{navigate(`/users/${answer.postedBy._id}`)}}>Posted By: <span className="link-to-profile">{answer.postedBy.name}</span></h4>
                         <img className={canEdit? "clickable" : "non-clickable"} src={question.cool ? '/cool.png' : '/notCool.png'}/>
                     </div>
                     <p className="small-text">{answer.when}</p>
                     <p>{answer.description}</p>
-                    </div>
+                    </Card>
                 )
             })}
             {isLoggedIn &&(
@@ -152,7 +172,7 @@ const QuestionDetailsPage = () =>{
                 <button id="post-answer-button" onClick={handleClick}>Post</button>
                 </div>
             </form>)}
-            {isLoggedIn && <button style={{display: posting? "none" : "block"}} id="new-answer-button" onClick={handleClick}>New Answer</button>}
+            {isLoggedIn && <Button variant="contained" style={{display: posting? "none" : "block"}} id="new-answer-button" onClick={handleClick}>New Answer</Button>}
             </div>
             {edit && 
             <EditQuestionForm 

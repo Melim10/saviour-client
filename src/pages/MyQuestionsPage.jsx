@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/auth.context";
 import axios from "axios";
-import NavBar from "../components/NavBar";
 import QuestionCardSmall from "../components/QuestionCardSmall";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import { Typography } from "@mui/material";
+
 
 function MyQuestions() {
 
@@ -12,7 +14,7 @@ function MyQuestions() {
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
 
-
+  !isLoggedIn && navigate('/')
   useEffect(()=>{
     axios.get(API_URL)
     .then((response) =>{
@@ -21,17 +23,18 @@ function MyQuestions() {
   },[])
 
   const makeNewQuestion = () =>{
-    navigate('/')
+    navigate('/new-question')
   }
-
-  console.log(user.name)
 
 
   return (
+    <div>
     <div className="card-list">
-          <h1>My Questions</h1>
-          <button className="new-question-button" onClick={makeNewQuestion}
-          >New question!</button>
+          <Typography gutterBottom variant="h2" component="div">
+            My Questions
+          </Typography>
+          <Button variant="contained"className="new-question-button"
+          onClick={makeNewQuestion}>Ask a question!</Button>
           {questions
             .filter((question) => question.postedBy === `${user.name}`)
             .map((question, id) => {
@@ -42,6 +45,7 @@ function MyQuestions() {
               )
             })}
     </div>
+  </div>
   );
 }
 

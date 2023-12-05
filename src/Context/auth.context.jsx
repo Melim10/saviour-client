@@ -50,6 +50,7 @@ function AuthProviderWrapper(props){
     }
 
     const logOut = () =>{
+        alert("See Ya")
         removeToken();
         authenticateUser();
         navigate('/');

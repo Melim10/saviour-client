@@ -1,9 +1,18 @@
 import { useEffect, useState, useContext} from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import EditProfileForm from "../components/EditProfileForm";
 import { AuthContext } from "../Context/auth.context";
 import AnswerCardSmall from "../components/AnswerCardSmall";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
   const UserProfilePage = () => {
   const { userId } = useParams();
@@ -12,11 +21,12 @@ import AnswerCardSmall from "../components/AnswerCardSmall";
   const [loading, setLoading] = useState(true);
   const [skills, setSkills] = useState([]);
   const [canEdit, setCanEdit] = useState(false);
-  const {user} = useContext(AuthContext);
+  const {user, isLoggedIn} = useContext(AuthContext);
+  const navigate = useNavigate();
 
 
   const API_URL = `http://localhost:5005/api/users/${userId}`;
-
+  !isLoggedIn && navigate('/')
 
 
   useEffect(() => {
@@ -59,16 +69,30 @@ import AnswerCardSmall from "../components/AnswerCardSmall";
 
 
   return (
-    <div className="margin-div">
+    <div>
       {!loading &&
-      <div style={{display: "flex"}}>
-        <div className="profile-info">
-          <img className="profile-picture" src={editableUser.picture}></img>
-          <h1>{editableUser.name}</h1>
-          <p>{editableUser.jobTitle}</p>
-          <p>Email: {editableUser.email}</p>
+      <div className="profile-container">
+        <Card sx={{}} className="profile-info">
+          <Avatar
+            alt="Remy Sharp"
+            src={editableUser.picture}
+            sx={{ width: 200, height: 200 }}
+            className="profile-info-picture"
+          />
+          <Typography gutterBottom variant="h5" component="div">
+            {editableUser.name}
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
+            {editableUser.jobTitle}
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
+            Email: {editableUser.email}
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
           Skills:
-          <ul>
+          </Typography>
+          <Typography variant="body2" color="text.primary">
+          <ul className="skill-to-delete">
                   {skills.map((skill, index) => (
                     <li key={index}>
                       <p className="skill-label">{skill}</p>
@@ -77,18 +101,22 @@ import AnswerCardSmall from "../components/AnswerCardSmall";
                     </li>
                   ))}
           </ul>
+          </Typography>
           {!edit && canEdit && (
-            <button
+            <Button variant="outlined"
               onClick={() => {
                 setEdit(true);
               }}
             >
               Edit Profile
-            </button>
+            </Button>
           )}
           {edit && <EditProfileForm defaultSkills={editableUser.skills} defaultPicture={editableUser.picture} defaultJobTitle={editableUser.jobTitle}/>}
-        </div>
-        <div><h3>{editableUser.name}'s Answers</h3>
+        </Card>
+        <div className="card-list">
+          <Typography gutterBottom variant="h3" component="div">
+            {editableUser.name}'s Answers
+          </Typography>
               {editableUser.answers.map((answer)=>{
                 return(<AnswerCardSmall answer={answer}/>)
               })}
