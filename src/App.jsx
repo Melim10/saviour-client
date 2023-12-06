@@ -9,13 +9,13 @@ import NewQuestion from './pages/NewQuestionPage'
 import QuestionDetailsPage from './pages/QuestionDetailsPage'
 import UserProfilePage from './pages/UserProfilePage'
 import MyQuestions from './pages/MyQuestionsPage'
-import NavBar from './components/NavBar_Styled'
+import MenuAppBar from './components/NavBar_Styled'
 
 function App() {
 
   return (
     <div>
-      <NavBar />
+      <MenuAppBar />
       <Routes>
         <Route path="/" element={<LandingPage />}/>
         <Route path="/x" element={<LoginPage />}/>

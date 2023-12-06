@@ -1,7 +1,8 @@
 .clickable{
   box-sizing: content-box;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
   border: 1px solid rgba(245, 245, 245, 0);
   box-sizing: content-box;
   padding: 5px;
@@ -42,18 +43,6 @@
   margin: 3vh auto;
   display: flex;
   flex-direction: column;
-}
-
-.answer-card-header{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-
-.answer-card > *{
-  padding: 0.5% 1%;
-
 }
 
 .profile-container{
@@ -178,3 +167,16 @@ min-width: 300px;
 
 .question-details-description{
 padding-top: 5vh;}
+
+.answers-div > *{
+  margin: 2% 0;
+}
+
+.same-height{
+  height: 80vh;
+}
+
+.profile-answer-card{
+  padding:1% 3%;
+  cursor: pointer;
+}

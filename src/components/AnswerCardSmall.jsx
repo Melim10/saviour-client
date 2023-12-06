@@ -6,25 +6,24 @@ import Typography from '@mui/material/Typography';
 const AnswerCardSmall = (props) =>{
 
     const{answer} = props;
+    console.log(answer);
 
     const navigate = useNavigate();
 
-    const goToDetails = (x) => {
-        navigate(`/questions/${x}`)
-    }
 
-
-
-    return(<Card onClick={()=>goToDetails(answer.question._id)} className="answer-card">
-            <div className="card-header">
-                <Typography>{answer.title}</Typography>
-                <h4>Posted by: {answer.question.postedBy}</h4>
-                <p className="small-text">{answer.when}</p>
+    return(<Card className="profile-answer-card" variant="outlined"  onClick={() => navigate(`/questions/${answer.question._id}`)}>
+            <div>
+                <Typography>{answer.description}</Typography>
+                <div style={{textAlign: "right"}}>
+                    <Typography variant="body2">
+                        on:{answer.question.title}
+                    </Typography>
+                    <Typography variant="body2">
+                        by:{answer.question.postedBy}
+                    </Typography>
+                </div>
             </div>
-            <div className="card-content">
-                <h3>{answer.question.title}</h3>
-            </div>
-            <p className="card-description">{answer.description}</p>
+
         </Card>)
 
 }

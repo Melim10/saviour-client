@@ -72,8 +72,8 @@ import Stack from '@mui/material/Stack';
   return (
     <div>
       {!loading ?(
-      <div className="profile-container">
-        <Card sx={{}} className="profile-info">
+      <div className="profile-container ">
+        <Card sx={{}} className="profile-info same-height">
           <Avatar
             alt="Remy Sharp"
             src={editableUser.picture}
@@ -114,7 +114,7 @@ import Stack from '@mui/material/Stack';
           )}
           {edit && <EditProfileForm defaultSkills={editableUser.skills} defaultPicture={editableUser.picture} defaultJobTitle={editableUser.jobTitle}/>}
         </Card>
-        <div className="card-list">
+        <div className="card-list same-height">
           <Typography gutterBottom variant="h3" component="div">
             {editableUser.name}'s Answers
           </Typography>

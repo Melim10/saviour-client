@@ -169,10 +169,14 @@ const QuestionDetailsPage = () =>{
                 return(
                     <Card variant="outlined" className="answer-card">
                     <div className="answer-card-header">
-                        <h4 onClick={()=>{navigate(`/users/${answer.postedBy._id}`)}}>Posted By: <span className="link-to-profile">{answer.postedBy.name}</span></h4>
-                        <img className={canEdit? "clickable" : "non-clickable"} src={question.cool ? '/cool.png' : '/notCool.png'}/>
+                        <Typography  onClick={()=>{navigate(`/users/${answer.postedBy._id}`)}}>
+                            Posted By: <span className="link-to-profile">{answer.postedBy.name}</span>
+                        </Typography >
+                        <div style={{display:"flex", alignItems:"center"}}>
+                            <p className="small-text">{answer.when}</p>
+                            <img className={canEdit? "clickable" : "non-clickable"} src={question.cool ? '/cool.png' : '/notCool.png'}/>
+                        </div>
                     </div>
-                    <p className="small-text">{answer.when}</p>
                     <p>{answer.description}</p>
                     </Card>
                 )
