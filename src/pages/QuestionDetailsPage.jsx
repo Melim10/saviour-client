@@ -6,7 +6,6 @@ import dateGenerator from "../utils/dateGenerator";
 import EditQuestionForm from "../components/EditQuestionForm";
 import { Button, Card } from "@mui/material";
 import Typography from '@mui/material/Typography';
-
 const QuestionDetailsPage = () =>{
     const {questionId} = useParams();
     const API_URL = `http://localhost:5005/api/questions/${questionId}`
@@ -21,11 +20,7 @@ const QuestionDetailsPage = () =>{
     const [skills, setSkills] = useState({});
     const [edit,setEdit] = useState(false)
     const [solved, setSolved] = useState(question.solved);
-
     const navigate = useNavigate();
-
-    
-
     useEffect(() => {
         axios
           .get(API_URL)
@@ -36,17 +31,13 @@ const QuestionDetailsPage = () =>{
           })
           .catch((error) => console.log(error));
       }, [solved]);
-
       useEffect(()=>{
         (isLoggedIn &&
         checkIfCanEdit());
         skills[0]&& setDefaultSkill1(skills[0]);
         skills[1]? setDefaultSkill2(skills[1]) : skills[1]&& setDefaultSkill2("None");
       },[question,])
-
-
     const handleClick = () => {
-
         if(!posting){
         setPosting(true)
         }
@@ -56,7 +47,6 @@ const QuestionDetailsPage = () =>{
             "when": dateGenerator(),
             "description": answer,
             "cool": false}
-        
         requestBody.description &&(
         axios.post(`${API_URL}/addAnswer`, requestBody))
         .then(console.log(requestBody))
@@ -65,7 +55,6 @@ const QuestionDetailsPage = () =>{
         navigate('/homepage')
         }
     }
-
     const checkIfCanEdit = () =>{
         if(question.userId === user._id){
             setCanEdit(true)
@@ -75,11 +64,9 @@ const QuestionDetailsPage = () =>{
             console.log(user.name," Not the original poster, original is", question.postedBy)
         }
     }
-
     const editQuestion = () =>{
         setEdit(!edit)
     }
-
     const handleSolved = () =>{
         setSolved(!question.solved);
         const requestBody = {
@@ -89,19 +76,16 @@ const QuestionDetailsPage = () =>{
             description: question.description,
             solved: !question.solved
         }
-
         axios.put(API_URL, requestBody)
         .then(
             navigate('/my-questions')
         )
         .catch((error) => console.log(error))
     }
-
     const handleDelete = () =>{
         axios.delete(API_URL)
         .then(navigate('/my-questions'))
     }
-
     return(<div className="card-list">
         {!loading ?  (
         <div  className="question-details-question">
@@ -123,11 +107,8 @@ const QuestionDetailsPage = () =>{
                     </Typography>
                 </div>
             </div>
-
-
         <div >
             <Typography>
-                    
                     {canEdit?
                 <div className="clickable-list">
             </div>
@@ -144,10 +125,7 @@ const QuestionDetailsPage = () =>{
             ""
             }
             </div>
-            
             <div>
-       
-
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
@@ -163,7 +141,6 @@ const QuestionDetailsPage = () =>{
             </div>
             </Card>
            <div className="answers-div">
-            
            <Typography gutterBottom variant="h6" component="div" className="card-header">Answers:</Typography>
             {question.answers && question.answers.map((answer)=>{
                 return(
@@ -191,12 +168,12 @@ const QuestionDetailsPage = () =>{
             </form>)}
             <Button variant="contained" style={{display: posting? "none" : "block"}} id="new-answer-button" onClick={handleClick}>New Answer</Button>
             </div>
-            {edit && 
-            <EditQuestionForm 
-            questionId={questionId} 
-            postedBy={question.postedBy} 
-            defaultTitle={question.title} 
-            defaultDescription={question.description} 
+            {edit &&
+            <EditQuestionForm
+            questionId={questionId}
+            postedBy={question.postedBy}
+            defaultTitle={question.title}
+            defaultDescription={question.description}
             defaultSolved={question.solved}
             defaultSkill1={defaultSkill1}
             defaultSkill2={defaultSkill2}
@@ -205,14 +182,10 @@ const QuestionDetailsPage = () =>{
         </div>
         )
         :(
-        <div className="loading-gif margin-div"> 
+        <div className="loading-gif margin-div">
             <img src="/loading.gif"/>
         </div>
         )}
     </div>)
-
 }
-
-
-
 export default QuestionDetailsPage;

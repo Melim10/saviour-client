@@ -22,6 +22,7 @@ return(
                     <li><Link to={`/users/${user._id}`} onClick={toggleMenu}>{user.name}</Link></li>
                     <li><Link to="/" onClick={toggleMenu}>All Questions</Link></li>
                     <li><Link to="/my-questions" onClick={toggleMenu}>My Questions</Link></li>
+                    <li><Link to="/ranking" onClick={toggleMenu}>Ranking</Link></li>
                     <li><Link to="/" onClick={logOut} >Logout</Link></li>
                 </ul>
             </div>

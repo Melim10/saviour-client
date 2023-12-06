@@ -15,7 +15,8 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const {user, isLoggedIn} = useContext(AuthContext)
-  console.log(user)
+  console.log(user, questions)
+
 
   const sortedQuestions = questions.sort((a, b) => {
     const dateA = new Date(a.when);
