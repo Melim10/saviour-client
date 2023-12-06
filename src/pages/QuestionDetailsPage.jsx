@@ -20,6 +20,8 @@ const QuestionDetailsPage = () =>{
     const [skills, setSkills] = useState({});
     const [edit,setEdit] = useState(false)
     const [solved, setSolved] = useState(question.solved);
+    const [cool, setCool] = useState()
+    const [user1, setUser1] = useState()
     const navigate = useNavigate();
     useEffect(() => {
         axios
@@ -37,6 +39,48 @@ const QuestionDetailsPage = () =>{
         skills[0]&& setDefaultSkill1(skills[0]);
         skills[1]? setDefaultSkill2(skills[1]) : skills[1]&& setDefaultSkill2("None");
       },[question,])
+      useEffect(()=>{
+        axios
+        .get(`http://localhost:5005/api/users/${user._id}`)
+        .then((response)=>{
+            setUser1(response.data)
+        })
+      }, [])
+      const handleCool = (answer) => {
+        let updatedCoolStatus;
+        let updatedCorrectAnswers;
+        if (cool) {
+          updatedCoolStatus = false;
+          updatedCorrectAnswers = user1.correctAnswers - 1;
+        } else {
+          updatedCoolStatus = true;
+          updatedCorrectAnswers = user1.correctAnswers + 1;
+        }
+        axios.put(
+          `http://localhost:5005/api/users/${user._id}`,
+          { correctAnswers: updatedCorrectAnswers }
+        )
+          .then(() => {
+            console.log('User updated successfully:', user1, user1.correctAnswers);
+            axios.put(
+              `http://localhost:5005/api/answers/${answer._id}`,
+              { cool: updatedCoolStatus }
+            )
+              .then(() => {
+                console.log('Answer Cool value is: ', updatedCoolStatus);
+              })
+              .catch((error) => {
+                console.error("Error updating answer:", error);
+              });
+            setCool(answer.cool);
+            setUser1(prevUser => ({ ...prevUser, correctAnswers: updatedCorrectAnswers }));
+            // navigate("/homepage")
+            console.log('Question updated successfully:', updatedCoolStatus);
+          })
+          .catch((error) => {
+            console.error("Error updating user:", error);
+          });
+      };
     const handleClick = () => {
         if(!posting){
         setPosting(true)
@@ -151,7 +195,11 @@ const QuestionDetailsPage = () =>{
                         </Typography >
                         <div style={{display:"flex", alignItems:"center"}}>
                             <p className="small-text">{answer.when}</p>
-                            <img className={canEdit? "clickable" : "non-clickable"} src={question.cool ? '/cool.png' : '/notCool.png'}/>
+                            <img
+                        src={answer.cool ? "/cool.png" : "/notCool.png"}
+                        onClick={()=>{handleCool(answer)}}
+                        className={canEdit ? "clickable" : "non-clickable"}
+                      />
                         </div>
                     </div>
                     <p>{answer.description}</p>
