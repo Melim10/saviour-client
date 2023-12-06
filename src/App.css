@@ -204,3 +204,26 @@ padding-top: 5vh;}
   display: flex;
   flex-direction: column;
 }
+
+.rank-list{
+  max-width: 25%;
+  min-width: 25%;
+  margin: 3vh auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.rank-card{
+  margin: 5px;
+  padding: 2% 5%;
+}
+
+.rank-card > div{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.rank-card > div > div{
+  display: flex;
+ }

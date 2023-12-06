@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserCardSmall from "../components/UserCardSmall";
+import { Typography } from "@mui/material";
+
 
 export default function RankingPage() {
   const API_URL = "https://saviour.adaptable.app/api/users";
@@ -15,8 +17,10 @@ export default function RankingPage() {
   console.log(users);
 
   return (
-    <div className="card-list">
-      <h1>Ranking</h1>
+    <div className="rank-list">
+      <Typography gutterBottom variant="h2" component="div">
+          Rankings
+      </Typography>
       <ul>
       {users.map((user, id) => {
         return (
