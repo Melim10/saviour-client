@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import skillsList from '../assets/skillList.json'
 import { useContext } from "react";
 import { AuthContext } from "../Context/auth.context";
+import { Button } from "@mui/material";
 
 export default function EditProfileForm(props) {
     const {user} = useContext(AuthContext)
@@ -32,7 +33,7 @@ export default function EditProfileForm(props) {
 
         axios.put(`${API_URL}/api/users/${userId}`, requestBody)
         .then(()=>{
-            navigate("/")
+            navigate("/homepage")
         })
         .catch((error)=>{
             const errorDescription = error.response.data.message;
@@ -73,7 +74,7 @@ export default function EditProfileForm(props) {
         </div>
 
         <div>
-        <button type="submit">Submit</button>
+        <Button variant="contained" size="small" onClick={handleEditSubmit}>Submit</Button>
         </div>
       </form>
     </div>

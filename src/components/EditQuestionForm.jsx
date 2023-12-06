@@ -33,7 +33,7 @@ const EditQuestionForm = (props) => {
 
     const handleSubmit = () =>{
         axios.put(`${API_URL}/api/questions/${questionId}`, requestBody)
-        navigate(`/`)
+        navigate(`/my-questions`)
     }
 
     return(

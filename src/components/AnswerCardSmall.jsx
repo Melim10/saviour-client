@@ -1,4 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import Card from '@mui/material/Card';
+import { CardContent } from "@mui/material";
+import Typography from '@mui/material/Typography';
+
 const AnswerCardSmall = (props) =>{
 
     const{answer} = props;
@@ -11,17 +15,17 @@ const AnswerCardSmall = (props) =>{
 
 
 
-    return(<div onClick={()=>goToDetails(answer.question._id)} className="question-card">
+    return(<Card onClick={()=>goToDetails(answer.question._id)} className="answer-card">
             <div className="card-header">
-                <h3>{answer.title}</h3>
-            </div>
-            <div className="card-content">
-                <h3>{answer.question.title}</h3>
+                <Typography>{answer.title}</Typography>
                 <h4>Posted by: {answer.question.postedBy}</h4>
                 <p className="small-text">{answer.when}</p>
             </div>
+            <div className="card-content">
+                <h3>{answer.question.title}</h3>
+            </div>
             <p className="card-description">{answer.description}</p>
-        </div>)
+        </Card>)
 
 }
 

@@ -1,11 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap'); */
-
-
-*{margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: "Noto Sans";
-}
+/*
 
 ul > * {
   list-style: none;
@@ -34,4 +27,14 @@ button{
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+ */
+
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Nunito+Sans:opsz@6..12&display=swap');
+
+
+*{margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Nunito+Sans:opsz@6..12&display=swap'); Sans";
 }

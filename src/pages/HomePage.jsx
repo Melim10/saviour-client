@@ -4,23 +4,27 @@ import QuestionCardSmall from "../components/QuestionCardSmall";
 import { useNavigate} from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Context/auth.context";
+import Button from '@mui/material/Button';
+import { Typography } from "@mui/material";
+
 
 function HomePage() {
 
   const API_URL = "http://localhost:5005/api/questions";
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const {user, isLoggedIn} = useContext(AuthContext)
+  console.log(user, questions)
+
+
   const sortedQuestions = questions.sort((a, b) => {
     const dateA = new Date(a.when);
     const dateB = new Date(b.when);
-  
     return dateB - dateA;
   });
-  
-  console.log("This is the sorted questions:",sortedQuestions);
 
-  const navigate = useNavigate();
-  const {user} = useContext(AuthContext)
-  console.log(user, questions)
+  !isLoggedIn && navigate('/')
 
 
 
@@ -28,6 +32,7 @@ function HomePage() {
     axios.get(API_URL)
     .then((response) =>{
       setQuestions(response.data);
+      setLoading(false);
     })  
   },[])
 
@@ -39,16 +44,24 @@ function HomePage() {
   return (
 
     <div className="card-list">
-          <h1>Recent Questions</h1>
-          <button className="new-question-button"
-          onClick={makeNewQuestion}>New question!</button>
-          {sortedQuestions.map((question, id)=>{
-            return(
-              <div key={id}>
-                  <QuestionCardSmall question={question}/>
-              </div>
-          )
-          })}
+          <Typography gutterBottom variant="h2" component="div">
+            Recent Questions
+          </Typography>
+          <Button variant="contained"className="new-question-button"
+          onClick={makeNewQuestion}>Ask a question!</Button>
+          {!loading?(
+                      sortedQuestions.map((question, id)=>{
+                        return(
+                          <div key={id}>
+                              <QuestionCardSmall question={question}/>
+                          </div>
+                      )
+                      })
+          ):(
+            <div className="loading-gif margin-div"> 
+                <img src="/loading.gif"/>
+            </div>
+          )}
     </div>
   );
 }
