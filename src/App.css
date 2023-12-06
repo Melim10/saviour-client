@@ -51,8 +51,9 @@
 }
 
 
-.answer-card{
-  border: 1px solid whitesmoke;
+.answer-card > *{
+  padding: 0.5% 1%;
+
 }
 
 .profile-container{
@@ -163,3 +164,17 @@ min-width: 300px;
   justify-content: left;
 }
 
+
+.question-details-question > *{
+  padding: 1% 3%;
+
+}
+
+.loading-gif{
+  margin: 0 auto;
+  width: min-content;
+  margin-top: 10%;
+}
+
+.question-details-description{
+padding-top: 5vh;}

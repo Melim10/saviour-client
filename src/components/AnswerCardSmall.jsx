@@ -17,12 +17,12 @@ const AnswerCardSmall = (props) =>{
 
     return(<Card onClick={()=>goToDetails(answer.question._id)} className="answer-card">
             <div className="card-header">
-                <h3>{answer.title}</h3>
+                <Typography>{answer.title}</Typography>
+                <h4>Posted by: {answer.question.postedBy}</h4>
+                <p className="small-text">{answer.when}</p>
             </div>
             <div className="card-content">
                 <h3>{answer.question.title}</h3>
-                <h4>Posted by: {answer.question.postedBy}</h4>
-                <p className="small-text">{answer.when}</p>
             </div>
             <p className="card-description">{answer.description}</p>
         </Card>)

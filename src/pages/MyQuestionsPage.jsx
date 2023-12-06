@@ -12,6 +12,7 @@ function MyQuestions() {
   const API_URL = "http://localhost:5005/api/questions";
   const { isLoggedIn, user, logOut } = useContext(AuthContext);
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   !isLoggedIn && navigate('/')
@@ -19,6 +20,7 @@ function MyQuestions() {
     axios.get(API_URL)
     .then((response) =>{
       setQuestions(response.data);
+      setLoading(false);
     })  
   },[])
 
@@ -35,7 +37,7 @@ function MyQuestions() {
           </Typography>
           <Button variant="contained"className="new-question-button"
           onClick={makeNewQuestion}>Ask a question!</Button>
-          {questions
+          {!loading ? (questions
             .filter((question) => question.postedBy === `${user.name}`)
             .map((question, id) => {
             return(
@@ -43,7 +45,11 @@ function MyQuestions() {
                 <QuestionCardSmall question={question} />
               </div>
               )
-            })}
+            })) :(
+              <div className="loading-gif margin-div"> 
+                  <img src="/loading.gif"/>
+              </div>
+            )}
     </div>
   </div>
   );

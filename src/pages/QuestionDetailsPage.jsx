@@ -102,18 +102,34 @@ const QuestionDetailsPage = () =>{
         .then(navigate('/my-questions'))
     }
 
-    return(<div>
+    return(<div className="card-list">
         {!loading ?  (
         <div  className="question-details-question">
-            <Typography gutterBottom variant="h3" component="div">
-            {question.title}
-            <div >
+            <Card>
+            <div  style={{display:"flex", flexDirection:"row", justifyContent: "space-between"}}>
+                <div>
+                    <Typography gutterBottom variant="h3" component="div">
+                    {question.title}
+                    <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}/>
+                    {canEdit && <img className="clickable" onClick={handleSolved}src={'/check.png'}></img>}
+                    </Typography>
+                </div>
+                <div>
+                    <Typography gutterBottom variant="h7" component="div" onClick={()=>{navigate(`/users/${question.userId}`)}}>
+                        Posted by:<span  className="link-to-profile">{question.postedBy}</span>
+                    </Typography>
+                    <Typography gutterBottom variant="h8" component="div">
+                        {question.when}
+                    </Typography>
+                </div>
+            </div>
+
+
+        <div >
             <Typography>
                     
-                    <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}/>
                     {canEdit?
                 <div className="clickable-list">
-                    <img className="clickable" onClick={handleSolved}src={'/check.png'}></img>
             </div>
             :
             ""
@@ -128,16 +144,10 @@ const QuestionDetailsPage = () =>{
             ""
             }
             </div>
-            </Typography>
             
-            <Card variant="elevation">
+            <div>
        
-            <Typography gutterBottom variant="h7" component="div">
-            <p onClick={()=>{navigate(`/users/${question.userId}`)}}>Posted by:<span  className="link-to-profile">{question.postedBy}</span></p>
-            </Typography>
-            <Typography gutterBottom variant="h8" component="div">
-                {question.when}
-            </Typography>
+
             <div className="skill-list">
             <p>Context: </p>
             {question.skills.length === 0 ? <p>No specific context</p> :
@@ -147,7 +157,10 @@ const QuestionDetailsPage = () =>{
                 )
             })}
            </div>
-            <p>{question.description}</p>
+           <Typography gutterBottom variant="h5" component="div" className="question-details-description">
+            {question.description}
+            </Typography>
+            </div>
             </Card>
            <div className="answers-div">
             
@@ -167,12 +180,12 @@ const QuestionDetailsPage = () =>{
             {isLoggedIn &&(
             <form id="answer-form" style={{display: posting? "block" : "none", width:"60vw", height:"20vh"}} >
                 <input type="text" style={{width:"800px", height:"200px"}} value={answer} onChange={(e)=> setAnswer(e.target.value)} maxLength={500}></input>
-                <div style={{display:"flex"}}>
+                <div style={{display:"flex", alignItems:"center"}}>
                 <p>{answer.length}/500</p>
-                <button id="post-answer-button" onClick={handleClick}>Post</button>
+                <Button variant="outlined" id="post-answer-button" style={{padding:"0px"}}onClick={handleClick}>Post</Button>
                 </div>
             </form>)}
-            {isLoggedIn && <Button variant="contained" style={{display: posting? "none" : "block"}} id="new-answer-button" onClick={handleClick}>New Answer</Button>}
+            <Button variant="contained" style={{display: posting? "none" : "block"}} id="new-answer-button" onClick={handleClick}>New Answer</Button>
             </div>
             {edit && 
             <EditQuestionForm 
@@ -188,9 +201,14 @@ const QuestionDetailsPage = () =>{
         </div>
         )
         :(
-        <h1 className="margin-div">loading</h1>)}
+        <div className="loading-gif margin-div"> 
+            <img src="/loading.gif"/>
+        </div>
+        )}
     </div>)
 
 }
+
+
 
 export default QuestionDetailsPage;

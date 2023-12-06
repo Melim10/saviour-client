@@ -12,9 +12,16 @@ function HomePage() {
 
   const API_URL = "http://localhost:5005/api/questions";
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const {user, isLoggedIn} = useContext(AuthContext)
   console.log(user)
+
+  const sortedQuestions = questions.sort((a, b) => {
+    const dateA = new Date(a.when);
+    const dateB = new Date(b.when);
+    return dateB - dateA;
+  });
 
   !isLoggedIn && navigate('/')
 
@@ -24,6 +31,7 @@ function HomePage() {
     axios.get(API_URL)
     .then((response) =>{
       setQuestions(response.data);
+      setLoading(false);
     })  
   },[])
 
@@ -40,13 +48,19 @@ function HomePage() {
           </Typography>
           <Button variant="contained"className="new-question-button"
           onClick={makeNewQuestion}>Ask a question!</Button>
-          {questions.map((question, id)=>{
-            return(
-              <div key={id}>
-                  <QuestionCardSmall question={question}/>
-              </div>
-          )
-          })}
+          {!loading?(
+                      sortedQuestions.map((question, id)=>{
+                        return(
+                          <div key={id}>
+                              <QuestionCardSmall question={question}/>
+                          </div>
+                      )
+                      })
+          ):(
+            <div className="loading-gif margin-div"> 
+                <img src="/loading.gif"/>
+            </div>
+          )}
     </div>
   );
 }

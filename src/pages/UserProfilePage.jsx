@@ -28,6 +28,7 @@ import Stack from '@mui/material/Stack';
   const API_URL = `http://localhost:5005/api/users/${userId}`;
   !isLoggedIn && navigate('/')
 
+  console.log(editableUser)
 
   useEffect(() => {
     axios
@@ -70,7 +71,7 @@ import Stack from '@mui/material/Stack';
 
   return (
     <div>
-      {!loading &&
+      {!loading ?(
       <div className="profile-container">
         <Card sx={{}} className="profile-info">
           <Avatar
@@ -122,7 +123,10 @@ import Stack from '@mui/material/Stack';
               })}
         </div>
         </div>
-      }
+      ):(
+        <div className="loading-gif margin-div"> 
+        <img src="/loading.gif"/>
+    </div>)}
     </div>
   );
 };
