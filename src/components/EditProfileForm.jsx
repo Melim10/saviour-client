@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-const API_URL = "http://localhost:5005"
+const API_URL = "https://saviour.adaptable.app"
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import skillsList from '../assets/skillList.json'
 import { useContext } from "react";
 import { AuthContext } from "../Context/auth.context";
 import { Button } from "@mui/material";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
+
 
 export default function EditProfileForm(props) {
     const {user} = useContext(AuthContext)
@@ -54,25 +58,51 @@ export default function EditProfileForm(props) {
   return (
     <div>
       <form onSubmit={handleEditSubmit}>
-      <div>
-          {skillsList.map((skill)=>{
-                  return( 
-                      skill !== "none" &&
-                      <div key={skill} style={{display: "flex"}}>
-                          <label style={{display:`${!defaultSkills.includes(skill)?"block":"none"}`}} >{skill} </label>
-                          <input type="checkbox" value={skill} onChange={(e)=>handleCheckBox(e.target.value)} style={{display:`${!defaultSkills.includes(skill)?"block":"none"}`}}></input>
-                      </div>
-                  )
-              })}
+      <div className="profile-skills-map">
+      {skillsList.map((skill) => {
+        return (
+          skill !== 'none' && (
+            <div key={skill} style={{ display: 'flex' }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={skillsToPush.includes(skill)}
+                    onChange={() => handleCheckBox(skill)}
+                    value={skill}
+                    style={{ display: !defaultSkills.includes(skill) ? 'block' : 'none' }}
+                  />
+                }
+                label={skill}
+                style={{ display: !defaultSkills.includes(skill) ? 'block' : 'none' }}
+              />
+            </div>
+          )
+        );
+      })}
       </div>
 
-        <div>
-        <label>Profile Picture</label>
-        <input type="text" name="picture" value={picture} onChange={(e)=>{setPicture(e.target.value)}} />
-        <label>Current Title</label>
-        <input type="text" name="title" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
-        </div>
-
+      <div>
+      <TextField
+        label="Profile Picture"
+        type="text"
+        name="picture"
+        value={picture}
+        onChange={(e) => setPicture(e.target.value)}
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+      <TextField
+        label="Current Title"
+        type="text"
+        name="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+    </div>
         <div>
         <Button variant="contained" size="small" onClick={handleEditSubmit}>Submit</Button>
         </div>

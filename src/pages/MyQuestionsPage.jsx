@@ -9,7 +9,7 @@ import { Typography } from "@mui/material";
 
 function MyQuestions() {
 
-  const API_URL = "http://localhost:5005/api/questions";
+  const API_URL = "https://saviour.adaptable.app/api/questions";
   const { isLoggedIn, user, logOut } = useContext(AuthContext);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);

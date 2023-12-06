@@ -25,7 +25,7 @@ import Stack from '@mui/material/Stack';
   const navigate = useNavigate();
 
 
-  const API_URL = `http://localhost:5005/api/users/${userId}`;
+  const API_URL = `https://saviour.adaptable.app/api/users/${userId}`;
   !isLoggedIn && navigate('/')
 
   console.log(editableUser)

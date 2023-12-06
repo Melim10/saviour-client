@@ -10,7 +10,7 @@ import { Typography } from "@mui/material";
 
 function HomePage() {
 
-  const API_URL = "http://localhost:5005/api/questions";
+  const API_URL = "https://saviour.adaptable.app/api/questions";
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

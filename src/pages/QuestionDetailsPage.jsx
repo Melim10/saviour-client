@@ -6,9 +6,10 @@ import dateGenerator from "../utils/dateGenerator";
 import EditQuestionForm from "../components/EditQuestionForm";
 import { Button, Card } from "@mui/material";
 import Typography from '@mui/material/Typography';
+
 const QuestionDetailsPage = () =>{
     const {questionId} = useParams();
-    const API_URL = `http://localhost:5005/api/questions/${questionId}`
+    const API_URL = `https://saviour.adaptable.app//api/questions/${questionId}`
     const {user, isLoggedIn} = useContext(AuthContext);
     const [question,setQuestion] = useState({});
     const [posting, setPosting] = useState(false);
@@ -41,7 +42,7 @@ const QuestionDetailsPage = () =>{
       },[question,])
       useEffect(()=>{
         axios
-        .get(`http://localhost:5005/api/users/${user._id}`)
+        .get(`https://saviour.adaptable.app/api/users/${user._id}`)
         .then((response)=>{
             setUser1(response.data)
         })
@@ -57,13 +58,13 @@ const QuestionDetailsPage = () =>{
           updatedCorrectAnswers = user1.correctAnswers + 1;
         }
         axios.put(
-          `http://localhost:5005/api/users/${user._id}`,
+          `https://saviour.adaptable.app/api/users/${user._id}`,
           { correctAnswers: updatedCorrectAnswers }
         )
           .then(() => {
             console.log('User updated successfully:', user1, user1.correctAnswers);
             axios.put(
-              `http://localhost:5005/api/answers/${answer._id}`,
+              `https://saviour.adaptable.app/${answer._id}`,
               { cool: updatedCoolStatus }
             )
               .then(() => {
@@ -139,12 +140,12 @@ const QuestionDetailsPage = () =>{
                     <Typography gutterBottom variant="h3" component="div">
                     {question.title}
                     <img className="solved-icon" src={question.solved?'/solved.png':'/notSolved.png'}/>
-                    {canEdit && <img className="clickable" onClick={handleSolved}src={'/check.png'}></img>}
+                    {canEdit && <img className="clickable" onClick={handleSolved} src={question.solved ? '/uncheck.png': '/check.png'}></img>}
                     </Typography>
                 </div>
                 <div>
                     <Typography gutterBottom variant="h7" component="div" onClick={()=>{navigate(`/users/${question.userId}`)}}>
-                        Posted by:<span  className="link-to-profile">{question.postedBy}</span>
+                        Posted by:<span className="link-to-profile">{question.postedBy}</span>
                     </Typography>
                     <Typography gutterBottom variant="h8" component="div">
                         {question.when}

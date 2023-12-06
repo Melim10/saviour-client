@@ -35,7 +35,7 @@ const QuestionCardSmall = (props) =>{
             </div>
             <div className="card-postedby">
             <Typography gutterBottom variant="h7" component="div">
-                Posted by: <span className="link-to-profile">{question.postedBy}</span>
+                Posted by: {question.postedBy}
             </Typography>
             <Typography gutterBottom variant="h8" component="div">
                 {question.when}

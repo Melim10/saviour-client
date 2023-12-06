@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import UserCardSmall from "../components/UserCardSmall";
 
 export default function RankingPage() {
-  const API_URL = "http://localhost:5005/api/users";
+  const API_URL = "https://saviour.adaptable.app/api/users";
   const [users, setUsers] = useState([])
 
   useEffect(() => {

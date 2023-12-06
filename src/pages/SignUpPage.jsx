@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import skillsList from '../assets/skillList.json'
 
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://saviour.adaptable.app/";
 
 function SignUpPage(){
     const [email, setEmail] = useState("");

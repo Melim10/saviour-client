@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/auth.context";
-const API_URL = "http://localhost:5005"
+const API_URL = "https://saviour.adaptable.app"
 
 export default function LoginPage() {
     const [email, setEmail] = useState("")

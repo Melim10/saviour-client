@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-const API_URL = "http://localhost:5005"
+const API_URL = "https://saviour.adaptable.app/"
 
 function Copyright(props) {
   return (

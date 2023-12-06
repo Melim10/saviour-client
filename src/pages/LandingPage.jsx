@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../Context/auth.context';
 import axios from 'axios';
-const API_URL = "http://localhost:5005";
+const API_URL = "https://saviour.adaptable.app/";
 
 function Copyright(props) {
   return (

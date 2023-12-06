@@ -21,7 +21,7 @@ const EditQuestionForm = (props) => {
         setSolved(defaultSolved)
     },[])
 
-    const API_URL = "http://localhost:5005";
+    const API_URL = "https://saviour.adaptable.app";
     
     const requestBody = {
         postedBy: postedBy,

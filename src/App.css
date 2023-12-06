@@ -81,7 +81,6 @@ min-width: 300px;
   border: 1px solid whitesmoke;
   padding: 1px;
   font-size: 1em;
-  border: 1px solid whitesmoke;
   padding: 5px;
   margin: 2px;
 }
@@ -131,10 +130,12 @@ min-width: 300px;
 
 .link-to-profile{
   cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #1976D2;
 }
 
 .link-to-profile:hover{
-  text-decoration: underline;
+  color:#1976D2 ;
 }
 
 .skill-to-delete{
@@ -179,4 +180,27 @@ padding-top: 5vh;}
 .profile-answer-card{
   padding:1% 3%;
   cursor: pointer;
+}
+
+.answer-card{
+  padding:1% 3%;
+  }
+
+.profile-skills-map {
+  width:50%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 25%;
+}
+
+.profile-info{
+  min-height: 80vh;
+  height: fit-content;
+}
+
+.new-question-div{
+  width: fit-content;
+  margin: 3vh auto;
+  display: flex;
+  flex-direction: column;
 }
