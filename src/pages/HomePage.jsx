@@ -9,9 +9,19 @@ function HomePage() {
 
   const API_URL = "http://localhost:5005/api/questions";
   const [questions, setQuestions] = useState([]);
+  const sortedQuestions = questions.sort((a, b) => {
+    const dateA = new Date(a.when);
+    const dateB = new Date(b.when);
+  
+    return dateB - dateA;
+  });
+  
+  console.log("This is the sorted questions:",sortedQuestions);
+
   const navigate = useNavigate();
   const {user} = useContext(AuthContext)
-  console.log(user)
+  console.log(user, questions)
+
 
 
   useEffect(()=>{
@@ -32,7 +42,7 @@ function HomePage() {
           <h1>Recent Questions</h1>
           <button className="new-question-button"
           onClick={makeNewQuestion}>New question!</button>
-          {questions.map((question, id)=>{
+          {sortedQuestions.map((question, id)=>{
             return(
               <div key={id}>
                   <QuestionCardSmall question={question}/>

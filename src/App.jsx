@@ -9,6 +9,7 @@ import NewQuestion from './pages/NewQuestionPage'
 import QuestionDetailsPage from './pages/QuestionDetailsPage'
 import UserProfilePage from './pages/UserProfilePage'
 import MyQuestions from './pages/MyQuestionsPage'
+import RankingPage from './pages/RankingPage'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/questions/:questionId" element={<QuestionDetailsPage />}/>
         <Route path="/new-question" element ={<NewQuestion/>} />
         <Route path="/users/:userId" element ={<UserProfilePage/>}/>
+        <Route path='/ranking' element={<RankingPage/>}/>
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </div>
