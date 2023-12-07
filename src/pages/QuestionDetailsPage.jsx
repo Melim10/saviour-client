@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 const QuestionDetailsPage = () =>{
     const {questionId} = useParams();
-    const API_URL = `https://saviour.adaptable.app//api/questions/${questionId}`
+    const API_URL = `https://saviour.adaptable.app/api/questions/${questionId}`
     const {user, isLoggedIn} = useContext(AuthContext);
     const [question,setQuestion] = useState({});
     const [posting, setPosting] = useState(false);
@@ -21,8 +21,9 @@ const QuestionDetailsPage = () =>{
     const [skills, setSkills] = useState({});
     const [edit,setEdit] = useState(false)
     const [solved, setSolved] = useState(question.solved);
-    const [cool, setCool] = useState()
-    const [user1, setUser1] = useState()
+    const [cool, setCool] = useState();
+    const [user1, setUser1] = useState();
+    const [render, reRender] = useState();
     const navigate = useNavigate();
     useEffect(() => {
         axios
@@ -33,13 +34,15 @@ const QuestionDetailsPage = () =>{
             setSkills(response.data.skills)
           })
           .catch((error) => console.log(error));
-      }, [solved]);
+      }, [render]);
+
       useEffect(()=>{
         (isLoggedIn &&
         checkIfCanEdit());
         skills[0]&& setDefaultSkill1(skills[0]);
         skills[1]? setDefaultSkill2(skills[1]) : skills[1]&& setDefaultSkill2("None");
       },[question,])
+      
       useEffect(()=>{
         axios
         .get(`https://saviour.adaptable.app/api/users/${user._id}`)
@@ -47,41 +50,53 @@ const QuestionDetailsPage = () =>{
             setUser1(response.data)
         })
       }, [])
+
       const handleCool = (answer) => {
+
+        console.log(answer.cool)
+        console.log(answer.postedBy._id)
+        
         let updatedCoolStatus;
         let updatedCorrectAnswers;
+        updatedCoolStatus = !answer.cool;
+        
+
         if (cool) {
-          updatedCoolStatus = false;
           updatedCorrectAnswers = user1.correctAnswers - 1;
+          console.log ("New status to push is:",updatedCoolStatus);
         } else {
-          updatedCoolStatus = true;
           updatedCorrectAnswers = user1.correctAnswers + 1;
+          console.log ("New status to push is:",updatedCoolStatus);
         }
         axios.put(
-          `https://saviour.adaptable.app/api/users/${user._id}`,
+          `https://saviour.adaptable.app/api/users/${answer.postedBy._id}`,
           { correctAnswers: updatedCorrectAnswers }
         )
           .then(() => {
             console.log('User updated successfully:', user1, user1.correctAnswers);
             axios.put(
-              `https://saviour.adaptable.app/${answer._id}`,
+              `https://saviour.adaptable.app/api/answers/${answer._id}`,
               { cool: updatedCoolStatus }
             )
               .then(() => {
-                console.log('Answer Cool value is: ', updatedCoolStatus);
+                axios
+                .get(API_URL)
+                .then((response) => {
+                  setQuestion(response.data);
+                  setLoading(false);
+                  setSkills(response.data.skills)
+                })
               })
               .catch((error) => {
                 console.error("Error updating answer:", error);
               });
-            setCool(answer.cool);
-            setUser1(prevUser => ({ ...prevUser, correctAnswers: updatedCorrectAnswers }));
-            // navigate("/homepage")
-            console.log('Question updated successfully:', updatedCoolStatus);
           })
           .catch((error) => {
             console.error("Error updating user:", error);
           });
-      };
+
+}
+
     const handleClick = () => {
         if(!posting){
         setPosting(true)
@@ -187,7 +202,7 @@ const QuestionDetailsPage = () =>{
             </Card>
            <div className="answers-div">
            <Typography gutterBottom variant="h6" component="div" className="card-header">Answers:</Typography>
-            {question.answers && question.answers.map((answer)=>{
+            {question && question.answers.map((answer)=>{
                 return(
                     <Card variant="outlined" className="answer-card">
                     <div className="answer-card-header">
