@@ -85,7 +85,7 @@ export default function MenuAppBar() {
                   My Questions
                 </MenuItem>
                 <MenuItem onClick={() => { handleClose2(); goTo('/rankings'); }}>
-                  Rankings
+                  Members
                 </MenuItem>
               </Menu>
               </div>)}

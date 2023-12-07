@@ -19,7 +19,7 @@ export default function RankingPage() {
   return (
     <div className="rank-list">
       <Typography gutterBottom variant="h4" component="div">
-          Our most usefull members:
+          Members:
       </Typography>
       <ul>
       {users.map((user, id) => {
