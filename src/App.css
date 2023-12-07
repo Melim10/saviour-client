@@ -138,10 +138,6 @@ min-width: 300px;
   color:#1976D2 ;
 }
 
-.skill-to-delete{
-  display: flex;
-}
-
 .nav-title{
   padding-left: 50px;
 }
@@ -186,9 +182,10 @@ padding-top: 5vh;}
 
 .profile-skills-map {
   width:50%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0 25%;
+  height: 90%;  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .profile-info{

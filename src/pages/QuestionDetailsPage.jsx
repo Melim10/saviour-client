@@ -52,28 +52,28 @@ const QuestionDetailsPage = () =>{
       }, [])
 
       const handleCool = (answer) => {
-
-        console.log(answer.cool)
-        console.log(answer.postedBy._id)
         
         let updatedCoolStatus;
-        let updatedCorrectAnswers;
         updatedCoolStatus = !answer.cool;
-        
 
-        if (cool) {
-          updatedCorrectAnswers = user1.correctAnswers - 1;
-          console.log ("New status to push is:",updatedCoolStatus);
+        console.log(answer.postedBy.name,"with id", answer.postedBy._id,"has",answer.postedBy.correctAnswers,"correct answers")
+        let updatedCorrectAnswers= answer.postedBy.correctAnswers === null?0:answer.postedBy.correctAnswers;
+        console.log("Updated AnswerCount is", updatedCorrectAnswers)
+
+        if (!updatedCoolStatus) {
+        console.log("Cool is:", updatedCoolStatus,"SUBTRACTING")
+        updatedCorrectAnswers --;
+        console.log("New value to push is", updatedCorrectAnswers)
         } else {
-          updatedCorrectAnswers = user1.correctAnswers + 1;
-          console.log ("New status to push is:",updatedCoolStatus);
+        console.log("Cool is:", updatedCoolStatus,"ADDING")
+          updatedCorrectAnswers ++;
+        console.log("New value to push is", updatedCorrectAnswers)
         }
         axios.put(
           `https://saviour.adaptable.app/api/users/${answer.postedBy._id}`,
           { correctAnswers: updatedCorrectAnswers }
         )
           .then(() => {
-            console.log('User updated successfully:', user1, user1.correctAnswers);
             axios.put(
               `https://saviour.adaptable.app/api/answers/${answer._id}`,
               { cool: updatedCoolStatus }
@@ -118,7 +118,6 @@ const QuestionDetailsPage = () =>{
     const checkIfCanEdit = () =>{
         if(question.userId === user._id){
             setCanEdit(true)
-            console.log("User Can Edit")
         }
         else{
             console.log(user.name," Not the original poster, original is", question.postedBy)
@@ -191,7 +190,7 @@ const QuestionDetailsPage = () =>{
             {question.skills.length === 0 ? <p>No specific context</p> :
             question.skills.map((skills)=>{
                 return(
-                    <p className="skill-label">{skills}</p>
+                   skills !== "none"  && <p className="skill-label">{skills}</p>
                 )
             })}
            </div>

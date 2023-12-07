@@ -93,7 +93,7 @@ import Stack from '@mui/material/Stack';
           Skills:
           </Typography>
           <Typography variant="body2" color="text.primary">
-          <ul className="skill-to-delete">
+          <ul className="skill-to-delete profile-skills-map">
                   {skills.map((skill, index) => (
                     <li key={index}>
                       <p className="skill-label">{skill}</p>
